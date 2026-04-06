@@ -15,9 +15,8 @@ const T = {
   white: "#FFFDF8",
 };
 
-// 1. UPDATED IMAGES: Added &h=500&fit=crop to ensure perfect squares and 16:9 ratios from the server
+// UPDATED IMAGES: &h=500&fit=crop for squares, &w=800&h=450 for 16:9 restaurants
 const IMG = {
-  // Dishes (1:1 Square)
   paneerTikka: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&h=500&fit=crop&q=80",
   manchurian: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&h=500&fit=crop&q=80",
   butterChicken: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=500&h=500&fit=crop&q=80",
@@ -48,7 +47,6 @@ const IMG = {
   jalebi: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&h=500&fit=crop&q=80",
   masalaChai: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=500&h=500&fit=crop&q=80",
 
-  // Restaurants (16:9 Aspect Ratio)
   spiceGarden: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=450&fit=crop&q=80",
   mumbaiFoods: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=450&fit=crop&q=80",
   greenBowl: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=450&fit=crop&q=80",
@@ -360,8 +358,8 @@ function Home({ restaurants, setPage, setRestId, L, gifMode, hist }) {
         {filtered.map((r) => (
           <div key={r.id} onClick={() => { setRestId(r.id); setPage("menu"); }} style={{ background: "#fff", borderRadius: 20, overflow: "hidden", border: `1px solid rgba(0,0,0,0.07)`, boxShadow: "0 2px 14px rgba(0,0,0,0.06)", cursor: "pointer", transition: "transform 0.2s,box-shadow 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(0,0,0,0.12)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 14px rgba(0,0,0,0.06)"; }}>
             
-            {/* 3. FLUID ASPECT RATIO FOR HOME CARDS */}
-            <div style={{ aspectRatio: "16/9", position: "relative" }}>
+            {/* Using a fixed height here ensures all cards align perfectly in the grid */}
+            <div style={{ height: "180px", position: "relative" }}>
               <GifImage src={r.img} alt={r.name} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
               {r.popular && <div style={{ position: "absolute", top: 10, right: 10, background: T.saffron, color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 9px", borderRadius: 9 }}>⭐ Popular</div>}
               {hist.some((h) => h.restId === r.id) && <div style={{ position: "absolute", top: 10, left: 10, background: "rgba(0,0,0,0.65)", color: "#fff", fontSize: 9, fontWeight: 700, padding: "3px 8px", borderRadius: 7, letterSpacing: 0.5 }}>🕐 Visited</div>}
@@ -440,11 +438,13 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setP
   return (
     <div style={{ maxWidth: 900, margin: "0 auto" }}>
       <div style={{ position: "relative", background: T.charcoal }}>
-        {/* FLUID BANNER ASPECT RATIO */}
-        <div style={{ aspectRatio: "21/9", maxHeight: "280px", overflow: "hidden", position: "relative" }}>
+        
+        {/* FIX FOR DISTORTED IMAGE: Use height instead of strict aspectRatio */}
+        <div style={{ height: "240px", overflow: "hidden", position: "relative" }}>
           <GifImage src={rest.img} alt={rest.name} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,transparent 15%,rgba(28,20,16,0.92))" }} />
         </div>
+
         <div style={{ padding: "12px 16px 16px", background: `linear-gradient(${T.charcoal},#2D1A00)` }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
             <div>
@@ -535,10 +535,8 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setP
           filtered.map((d) => {
             const qty = cart[d.id] || 0;
             return (
-              // 2. COMPLETELY REDESIGNED DISH CARD: Swiggy/Zomato Style Horizontal Layout
-              <div key={d.id} style={{ background: "#fff", borderRadius: 16, overflow: "hidden", border: `1px solid rgba(0,0,0,0.06)`, boxShadow: "0 4px 16px rgba(0,0,0,0.04)", padding: "16px", display: "flex", gap: "16px" }}>
+              <div key={d.id} style={{ background: "#fff", borderRadius: 16, overflow: "hidden", border: `1px solid rgba(0,0,0,0.06)`, boxShadow: "0 4px 16px rgba(0,0,0,0.04)", padding: "16px", display: "flex", gap: "14px" }}>
                 
-                {/* Left Side: Details */}
                 <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
                     <div style={{ width: 16, height: 16, borderRadius: 4, border: `1.5px solid ${d.veg ? T.success : T.danger}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -547,7 +545,8 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setP
                     {d.popular && <span style={{ background: T.saffronLight, color: T.saffronDark, fontSize: 10, fontWeight: 800, padding: "2px 6px", borderRadius: 4, letterSpacing: 0.5, textTransform: "uppercase" }}>Bestseller</span>}
                   </div>
 
-                  <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 18, fontWeight: 700, lineHeight: 1.2, color: T.charcoal, marginBottom: 6 }}>{nm(d, lang)}</h3>
+                  {/* Add word-break here so long names like "Quinoa Buddha Bowl" don't overflow on small screens */}
+                  <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 18, fontWeight: 700, lineHeight: 1.2, color: T.charcoal, marginBottom: 6, wordBreak: "break-word" }}>{nm(d, lang)}</h3>
                   
                   <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                     <div style={{ fontSize: 15, fontWeight: 700, color: T.charcoal }}>₹{d.price}</div>
@@ -566,13 +565,13 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setP
                     })}
                   </div>
 
-                  <div style={{ marginTop: "auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <div style={{ marginTop: "auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", flexWrap: "wrap" }}>
                       <div style={{ fontSize: 12, color: T.warmGrey, display: "flex", gap: 12, fontWeight: 500 }}>
                         <span>🔥 {Math.round(d.calories * persons)} cal</span>
                         <span>⏱ {d.prepTime} min</span>
                       </div>
                       <button onClick={() => setExpanded((p) => ({ ...p, [d.id]: !p[d.id] }))} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: T.saffron, fontWeight: 700, padding: 0 }}>
-                        {expanded[d.id] ? "▾ Hide" : "▸ View"} Details
+                        {expanded[d.id] ? "▾ Hide" : "▸ Details"}
                       </button>
                   </div>
 
@@ -583,22 +582,21 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setP
                   )}
                 </div>
 
-                {/* Right Side: Square Image & Overlapping Add Button */}
-                <div style={{ width: "130px", flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
-                  <div style={{ width: "130px", height: "130px", borderRadius: "16px", overflow: "hidden", position: "relative", boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}>
+                <div style={{ width: "120px", flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <div style={{ width: "120px", height: "120px", borderRadius: "16px", overflow: "hidden", position: "relative", boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}>
                     <GifImage src={d.img} alt={nm(d, lang)} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
                   </div>
                   
                   <div style={{ marginTop: "-16px", zIndex: 2, width: "100%", display: "flex", justifyContent: "center" }}>
                     {qty === 0 ? (
-                      <button onClick={() => add(d.id)} style={{ background: "#fff", color: T.success, border: `1px solid ${T.success}44`, cursor: "pointer", padding: "8px 28px", borderRadius: "10px", fontSize: 15, fontWeight: 800, boxShadow: "0 4px 10px rgba(0,0,0,0.06)", textTransform: "uppercase", width: "110px" }}>
+                      <button onClick={() => add(d.id)} style={{ background: "#fff", color: T.success, border: `1px solid ${T.success}44`, cursor: "pointer", padding: "6px 20px", borderRadius: "8px", fontSize: 14, fontWeight: 800, boxShadow: "0 4px 10px rgba(0,0,0,0.06)", textTransform: "uppercase", width: "100px" }}>
                         Add
                       </button>
                     ) : (
-                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#fff", border: `1px solid ${T.success}`, borderRadius: "10px", padding: "4px 8px", boxShadow: "0 4px 10px rgba(0,0,0,0.06)", width: "110px" }}>
-                        <button onClick={() => rem(d.id)} style={{ width: 28, height: 28, background: "none", border: "none", color: T.success, fontSize: 20, cursor: "pointer", fontWeight: 700, display:"flex", alignItems:"center", justifyContent:"center" }}>−</button>
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#fff", border: `1px solid ${T.success}`, borderRadius: "8px", padding: "4px", boxShadow: "0 4px 10px rgba(0,0,0,0.06)", width: "100px" }}>
+                        <button onClick={() => rem(d.id)} style={{ width: 26, height: 26, background: "none", border: "none", color: T.success, fontSize: 20, cursor: "pointer", fontWeight: 700, display:"flex", alignItems:"center", justifyContent:"center" }}>−</button>
                         <span style={{ fontWeight: 800, fontSize: 15, minWidth: 20, textAlign: "center", color: T.success }}>{qty}</span>
-                        <button onClick={() => add(d.id)} style={{ width: 28, height: 28, background: "none", border: "none", color: T.success, fontSize: 20, cursor: "pointer", fontWeight: 700, display:"flex", alignItems:"center", justifyContent:"center" }}>+</button>
+                        <button onClick={() => add(d.id)} style={{ width: 26, height: 26, background: "none", border: "none", color: T.success, fontSize: 20, cursor: "pointer", fontWeight: 700, display:"flex", alignItems:"center", justifyContent:"center" }}>+</button>
                       </div>
                     )}
                   </div>
