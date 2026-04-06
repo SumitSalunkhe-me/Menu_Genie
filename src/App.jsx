@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 
 const T = {
   saffron: "#E8750A",
@@ -15,7 +15,6 @@ const T = {
   white: "#FFFDF8",
 };
 
-// IMAGES
 const IMG = {
   paneerTikka: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&h=500&fit=crop&q=80",
   manchurian: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&h=500&fit=crop&q=80",
@@ -70,52 +69,39 @@ const IMG = {
   streetBites: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&h=450&fit=crop&q=80",
 };
 
-const GIF_FRAMES = [
-  "linear-gradient(45deg,rgba(232,117,10,0.38) 0%,transparent 65%)",
-  "linear-gradient(135deg,rgba(107,26,42,0.32) 0%,transparent 65%)",
-  "linear-gradient(225deg,rgba(255,180,50,0.28) 0%,transparent 65%)",
-  "linear-gradient(315deg,rgba(45,122,79,0.28) 0%,transparent 65%)",
-];
-
-function GifImage({ src, alt, style, gifMode }) {
-  const [frame, setFrame] = useState(0);
-  const [zoom, setZoom] = useState(1);
-  const iv = useRef(null);
-  useEffect(() => {
-    if (gifMode) {
-      iv.current = setInterval(() => {
-        setFrame((f) => (f + 1) % GIF_FRAMES.length);
-        setZoom((z) => (z === 1 ? 1.06 : 1));
-      }, 380);
-    } else {
-      clearInterval(iv.current);
-      setFrame(0);
-      setZoom(1);
-    }
-    return () => clearInterval(iv.current);
-  }, [gifMode]);
+// 1. SOLUTION FOR SLOW IMAGES: Progressive Shimmer Loading
+// Automatically shows a Zomato/Swiggy style animated grey gradient while the image downloads.
+function ProgressiveImage({ src, alt, style }) {
+  const [loaded, setLoaded] = useState(false);
 
   return (
-    <div style={{ ...style, position: "relative", overflow: "hidden" }}>
-      <img src={src} alt={alt} style={{ width: "100%", height: "100%", objectFit: "cover", transition: gifMode ? "transform 0.38s ease" : "transform 0.3s", transform: `scale(${zoom})` }} onError={(e) => { e.target.style.opacity = 0; }} />
-      {gifMode && (
-        <>
-          <div style={{ position: "absolute", inset: 0, background: GIF_FRAMES[frame], transition: "background 0.32s", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", top: 7, left: 7, background: "rgba(0,0,0,0.72)", color: "#fff", fontSize: 9, fontWeight: 900, padding: "2px 6px", borderRadius: 4, letterSpacing: 1, fontFamily: "monospace" }}>GIF</div>
-        </>
+    <div style={{ ...style, position: "relative", overflow: "hidden", background: T.creamD }}>
+      {!loaded && (
+        <div style={{
+          position: "absolute", inset: 0, zIndex: 1,
+          background: `linear-gradient(90deg, #F5EAD8 25%, #FFF3E6 50%, #F5EAD8 75%)`,
+          backgroundSize: "200% 100%", animation: "shimmer 1.5s infinite"
+        }} />
       )}
+      <img 
+        src={src} alt={alt} 
+        onLoad={() => setLoaded(true)}
+        style={{ width: "100%", height: "100%", objectFit: "cover", opacity: loaded ? 1 : 0, transition: "opacity 0.3s ease" }}
+        onError={(e) => { e.target.style.opacity = 0; }} 
+      />
     </div>
   );
 }
 
+// 2. REALISTIC DATA UPDATES: Real-world GPS formats, valid-looking 14-digit FSSAI, and real +91 Mobile numbering
 const RESTS = [
-  { id: 1, name: "Spice Garden", cuisine: "Authentic Indian", city: "Pune", area: "FC Road", rating: 4.6, reviews: 842, fssai: "10020042012345", openTill: "11 PM", emoji: "🍛", popular: true, img: IMG.spiceGarden, phone: "+91 99999 11111", location: { lat: 18.5204, lng: 73.8567 } },
-  { id: 2, name: "Mumbai Tadka", cuisine: "Street Food & Chaats", city: "Mumbai", area: "Bandra West", rating: 4.8, reviews: 934, fssai: "10020042067890", openTill: "10 PM", emoji: "🌮", popular: true, img: IMG.mumbaiFoods, phone: "+91 99999 22222", location: { lat: 19.0596, lng: 72.8295 } },
-  { id: 3, name: "The Green Bowl", cuisine: "Healthy & Vegan", city: "Pune", area: "Koregaon Park", rating: 4.8, reviews: 317, fssai: "10020042099123", openTill: "9 PM", emoji: "🥗", popular: true, img: IMG.greenBowlRest, phone: "+91 99999 33333", location: { lat: 18.5362, lng: 73.8939 } },
-  { id: 4, name: "Tandoor Tales", cuisine: "Mughlai & North Indian", city: "Delhi", area: "Connaught Place", rating: 4.7, reviews: 1124, fssai: "10020042031456", openTill: "11:30 PM", emoji: "🔥", popular: true, img: IMG.tandoorTales, phone: "+91 99999 44444", location: { lat: 28.6315, lng: 77.2167 } },
-  { id: 5, name: "Coastal Curry House", cuisine: "South Indian & Seafood", city: "Chennai", area: "T. Nagar", rating: 4.5, reviews: 689, fssai: "10020042055789", openTill: "10:30 PM", emoji: "🦐", popular: false, img: IMG.coastalCurry, phone: "+91 99999 55555", location: { lat: 13.0418, lng: 80.2341 } },
-  { id: 6, name: "Street Bites Co.", cuisine: "Pan-Indian Street Food", city: "Bangalore", area: "Indiranagar", rating: 4.3, reviews: 478, fssai: "10020042078901", openTill: "11 PM", emoji: "🍢", popular: false, img: IMG.streetBites, phone: "+91 99999 66666", location: { lat: 12.9784, lng: 77.6408 } },
-  { id: 7, name: "Seoul Spice", cuisine: "Authentic Korean", city: "Pune", area: "Kalyani Nagar", rating: 4.9, reviews: 412, fssai: "10020042088888", openTill: "11 PM", emoji: "🥢", popular: true, img: IMG.koreanRest, phone: "+91 99999 77777", location: { lat: 18.5463, lng: 73.9033 } }
+  { id: 1, name: "Spice Garden", cuisine: "Authentic Indian", city: "Pune", area: "FC Road", rating: 4.6, reviews: 842, fssai: "11521036000145", openTill: "11 PM", emoji: "🍛", popular: true, img: IMG.spiceGarden, phone: "+91 98220 12345", location: { lat: 18.5246, lng: 73.8411 } },
+  { id: 2, name: "Mumbai Tadka", cuisine: "Street Food & Chaats", city: "Mumbai", area: "Bandra West", rating: 4.8, reviews: 934, fssai: "11519006000452", openTill: "10 PM", emoji: "🌮", popular: true, img: IMG.mumbaiFoods, phone: "+91 99870 98765", location: { lat: 19.0544, lng: 72.8402 } },
+  { id: 3, name: "The Green Bowl", cuisine: "Healthy & Vegan", city: "Pune", area: "Koregaon Park", rating: 4.8, reviews: 317, fssai: "11522036000789", openTill: "9 PM", emoji: "🥗", popular: true, img: IMG.greenBowlRest, phone: "+91 91580 55555", location: { lat: 18.5362, lng: 73.8939 } },
+  { id: 4, name: "Tandoor Tales", cuisine: "Mughlai & North Indian", city: "Delhi", area: "Connaught Place", rating: 4.7, reviews: 1124, fssai: "13320008000111", openTill: "11:30 PM", emoji: "🔥", popular: true, img: IMG.tandoorTales, phone: "+91 98111 22233", location: { lat: 28.6315, lng: 77.2167 } },
+  { id: 5, name: "Coastal Curry House", cuisine: "South Indian & Seafood", city: "Chennai", area: "T. Nagar", rating: 4.5, reviews: 689, fssai: "12418002001234", openTill: "10:30 PM", emoji: "🦐", popular: false, img: IMG.coastalCurry, phone: "+91 94440 11222", location: { lat: 13.0418, lng: 80.2341 } },
+  { id: 6, name: "Street Bites Co.", cuisine: "Pan-Indian Street Food", city: "Bangalore", area: "Indiranagar", rating: 4.3, reviews: 478, fssai: "11221333000555", openTill: "11 PM", emoji: "🍢", popular: false, img: IMG.streetBites, phone: "+91 99000 44555", location: { lat: 12.9784, lng: 77.6408 } },
+  { id: 7, name: "Seoul Spice", cuisine: "Authentic Korean", city: "Pune", area: "Kalyani Nagar", rating: 4.9, reviews: 412, fssai: "11523036000999", openTill: "11 PM", emoji: "🥢", popular: true, img: IMG.koreanRest, phone: "+91 96040 77888", location: { lat: 18.5463, lng: 73.9033 } }
 ];
 
 const DISHES = [
@@ -172,9 +158,9 @@ const DISHES = [
 ];
 
 const LABELS = {
-  en: { all: "All", starter: "Starters", main: "Mains", bread: "Breads", dessert: "Desserts", drinks: "Drinks", search: "Search dishes...", veg: "🌿 Veg", nonveg: "🍗 Non-Veg", all2: "All", bestsellers: "Bestsellers", add: "Add", cart: "Cart", orderWA: "Order on WhatsApp", prep: "Prep", cal: "cal", ingredients: "Ingredients", persons: "Persons", login: "Login", logout: "Logout", admin: "Admin", home: "Home", feedback: "Feedback", noItems: "No dishes found.", fssai: "FSSAI Certified", openTill: "Open till", map: "Map", maxPrice: "Max Price", maxTime: "Max Prep Time", gifOn: "✦ GIF ON", gifOff: "✦ GIF", back: "← Back", history: "History", quickNav: "Quick Nav", noHistory: "No history yet", sort: "Sort", sortDef: "Default", sortFast: "⚡ Fastest", sortPrice: "💰 Price", sortRating: "⭐ Rating", diet: "Diet", filters: "Filters", lastVisit: "Last visited", speak: "Listening…", submit: "Submit", cancel: "Cancel", thankyou: "Thanks for your feedback 🙏" },
-  hi: { all: "सभी", starter: "स्टार्टर", main: "मुख्य", bread: "रोटी", dessert: "मिठाई", drinks: "पेय", search: "व्यंजन खोजें...", veg: "🌿 शाकाहारी", nonveg: "🍗 मांसाहारी", all2: "सभी", bestsellers: "केवल बेस्टसेलर", add: "जोड़ें", cart: "कार्ट", orderWA: "WhatsApp ऑर्डर", prep: "समय", cal: "कैलोरी", ingredients: "सामग्री", persons: "व्यक्ति", login: "लॉगिन", logout: "लॉगआउट", admin: "एडमिन", home: "होम", feedback: "प्रतिक्रिया", noItems: "कोई व्यंजन नहीं।", fssai: "FSSAI प्रमाणित", openTill: "खुला", map: "नक्शा", maxPrice: "अधिकतम मूल्य", maxTime: "समय सीमा", gifOn: "✦ GIF चालू", gifOff: "✦ GIF", back: "← वापस", history: "इतिहास", quickNav: "शीघ्र नेव", noHistory: "कोई इतिहास नहीं", sort: "क्रम", sortDef: "डिफ़ॉल्ट", sortFast: "⚡ जल्दी", sortPrice: "💰 मूल्य", sortRating: "⭐ रेटिंग", diet: "आहार", filters: "फिल्टर", lastVisit: "अंतिम विज़िट", speak: "सुन रहा है...", submit: "जमा करें", cancel: "रद्द करें", thankyou: "प्रतिक्रिया के लिए धन्यवाद 🙏" },
-  mr: { all: "सर्व", starter: "स्टार्टर", main: "मुख्य", bread: "भाकरी", dessert: "मिठाई", drinks: "पेय", search: "पदार्थ शोधा...", veg: "🌿 शाकाहारी", nonveg: "🍗 मांसाहारी", all2: "सर्व", bestsellers: "फक्त बेस्टसेलर", add: "जोडा", cart: "कार्ट", orderWA: "WhatsApp ऑर्डर", prep: "वेळ", cal: "कॅलरी", ingredients: "साहित्य", persons: "व्यक्ती", login: "लॉगिन", logout: "लॉगआउट", admin: "अॅडमिन", home: "होम", feedback: "अभिप्राय", noItems: "पदार्थ नाही.", fssai: "FSSAI प्रमाणित", openTill: "उघडे", map: "नकाशा", maxPrice: "कमाल किंमत", maxTime: "कमाल वेळ", gifOn: "✦ GIF चालू", gifOff: "✦ GIF", back: "← परत", history: "इतिहास", quickNav: "जलद नेव", noHistory: "इतिहास नाही", sort: "क्रम", sortDef: "डिफॉल्ट", sortFast: "⚡ जलद", sortPrice: "💰 किंमत", sortRating: "⭐ रेटिंग", diet: "आहार", filters: "फिल्टर", lastVisit: "अखेरची भेट", speak: "ऐकत आहे...", submit: "सबमिट", cancel: "रद्द", thankyou: "अभिप्रायाबद्दल धन्यवाद 🙏" },
+  en: { all: "All", starter: "Starters", main: "Mains", bread: "Breads", dessert: "Desserts", drinks: "Drinks", search: "Search dishes...", veg: "🌿 Veg", nonveg: "🍗 Non-Veg", all2: "All", bestsellers: "Bestsellers", add: "Add", cart: "Cart", orderWA: "Order on WhatsApp", prep: "Prep", cal: "cal", ingredients: "Ingredients", persons: "Persons", login: "Login", logout: "Logout", admin: "Admin", home: "Home", feedback: "Feedback", noItems: "No dishes found.", fssai: "FSSAI Certified", openTill: "Open till", map: "Map", maxPrice: "Max Price", maxTime: "Max Prep Time", back: "← Back", history: "History", quickNav: "Quick Nav", noHistory: "No history yet", sort: "Sort", sortDef: "Default", sortFast: "⚡ Fastest", sortPrice: "💰 Price", sortRating: "⭐ Rating", diet: "Diet", filters: "Filters", lastVisit: "Last visited", speak: "Listening…", submit: "Submit", cancel: "Cancel", thankyou: "Thanks for your feedback 🙏" },
+  hi: { all: "सभी", starter: "स्टार्टर", main: "मुख्य", bread: "रोटी", dessert: "मिठाई", drinks: "पेय", search: "व्यंजन खोजें...", veg: "🌿 शाकाहारी", nonveg: "🍗 मांसाहारी", all2: "सभी", bestsellers: "केवल बेस्टसेलर", add: "जोड़ें", cart: "कार्ट", orderWA: "WhatsApp ऑर्डर", prep: "समय", cal: "कैलोरी", ingredients: "सामग्री", persons: "व्यक्ति", login: "लॉगिन", logout: "लॉगआउट", admin: "एडमिन", home: "होम", feedback: "प्रतिक्रिया", noItems: "कोई व्यंजन नहीं।", fssai: "FSSAI प्रमाणित", openTill: "खुला", map: "नक्शा", maxPrice: "अधिकतम मूल्य", maxTime: "समय सीमा", back: "← वापस", history: "इतिहास", quickNav: "शीघ्र नेव", noHistory: "कोई इतिहास नहीं", sort: "क्रम", sortDef: "डिफ़ॉल्ट", sortFast: "⚡ जल्दी", sortPrice: "💰 मूल्य", sortRating: "⭐ रेटिंग", diet: "आहार", filters: "फिल्टर", lastVisit: "अंतिम विज़िट", speak: "सुन रहा है...", submit: "जमा करें", cancel: "रद्द करें", thankyou: "प्रतिक्रिया के लिए धन्यवाद 🙏" },
+  mr: { all: "सर्व", starter: "स्टार्टर", main: "मुख्य", bread: "भाकरी", dessert: "मिठाई", drinks: "पेय", search: "पदार्थ शोधा...", veg: "🌿 शाकाहारी", nonveg: "🍗 मांसाहारी", all2: "सर्व", bestsellers: "फक्त बेस्टसेलर", add: "जोडा", cart: "कार्ट", orderWA: "WhatsApp ऑर्डर", prep: "वेळ", cal: "कॅलरी", ingredients: "साहित्य", persons: "व्यक्ती", login: "लॉगिन", logout: "लॉगआउट", admin: "अॅडमिन", home: "होम", feedback: "अभिप्राय", noItems: "पदार्थ नाही.", fssai: "FSSAI प्रमाणित", openTill: "उघडे", map: "नकाशा", maxPrice: "कमाल किंमत", maxTime: "कमाल वेळ", back: "← परत", history: "इतिहास", quickNav: "जलद नेव", noHistory: "इतिहास नाही", sort: "क्रम", sortDef: "डिफॉल्ट", sortFast: "⚡ जलद", sortPrice: "💰 किंमत", sortRating: "⭐ रेटिंग", diet: "आहार", filters: "फिल्टर", lastVisit: "अखेरची भेट", speak: "ऐकत आहे...", submit: "सबमिट", cancel: "रद्द", thankyou: "अभिप्रायाबद्दल धन्यवाद 🙏" },
 };
 
 const allergenColor = { dairy: "#EBF5FB:#1A6B9A", nuts: "#FEF9E7:#9A7D0A", gluten: "#FDF2F8:#9B59B6", egg: "#FEF5E7:#CA6F1E", soy: "#F0F3FF:#2E4BA0" };
@@ -205,15 +191,23 @@ function Toasts({ toasts }) {
   );
 }
 
-function HistoryPanel({ hist, restaurants, goToRestaurant, onClose, L }) {
+// 3. HISTORY PANEL UPDATE: Added the "Clear" button functionality
+function HistoryPanel({ hist, restaurants, goToRestaurant, onClose, clearHistory, L }) {
   return (
     <div style={{ position: "absolute", top: "calc(100% + 8px)", right: 0, background: "#fff", borderRadius: 16, boxShadow: "0 10px 40px rgba(0,0,0,0.2)", border: `1px solid ${T.saffron}33`, zIndex: 400, minWidth: 240, overflow: "hidden" }}>
-      <div style={{ padding: "10px 14px 6px", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: T.warmGrey, borderBottom: `1px solid ${T.saffron}22` }}>{L.history}</div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: `1px solid ${T.saffron}22`, padding: "10px 14px 6px" }}>
+        <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: T.warmGrey }}>{L.history}</div>
+        {hist.length > 0 && (
+          <button onClick={clearHistory} style={{ fontSize: 10, color: T.danger, background: "none", border: "none", cursor: "pointer", fontWeight: 600 }}>Clear</button>
+        )}
+      </div>
+
       {hist.length === 0 ? (
         <div style={{ padding: "14px", fontSize: 13, color: "#bbb" }}>{L.noHistory}</div>
       ) : (
         hist.slice().reverse().slice(0, 5).map((h, i) => {
           const r = restaurants.find((x) => x.id === h.restId);
+          if (!r) return null;
           return (
             <button key={i} onClick={() => { goToRestaurant(h.restId); onClose(); }}
               style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "9px 14px", background: "none", border: "none", cursor: "pointer", textAlign: "left", borderBottom: `1px solid ${T.saffron}11` }}
@@ -221,7 +215,7 @@ function HistoryPanel({ hist, restaurants, goToRestaurant, onClose, L }) {
               onMouseLeave={(e) => e.currentTarget.style.background = "none"}
             >
               <div style={{ width: 34, height: 34, borderRadius: 8, overflow: "hidden", flexShrink: 0 }}>
-                <img src={r?.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={(e) => e.target.style.display = "none"} />
+                <ProgressiveImage src={r?.img} alt="" style={{ width: "100%", height: "100%" }} />
               </div>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 600, color: T.charcoal }}>{r?.emoji} {r?.name}</div>
@@ -238,7 +232,9 @@ function HistoryPanel({ hist, restaurants, goToRestaurant, onClose, L }) {
           onMouseEnter={(e) => e.currentTarget.style.background = T.saffronLight}
           onMouseLeave={(e) => e.currentTarget.style.background = "none"}
         >
-          <GifImage src={r.img} alt={r.name} style={{ width: 32, height: 32, borderRadius: 7 }} gifMode={false} />
+          <div style={{ width: 32, height: 32, borderRadius: 7, overflow: "hidden", flexShrink: 0 }}>
+            <ProgressiveImage src={r.img} alt={r.name} style={{ width: "100%", height: "100%" }} />
+          </div>
           <div>
             <div style={{ fontSize: 12, fontWeight: 600 }}>{r.emoji} {r.name}</div>
             <div style={{ fontSize: 10, color: T.warmGrey }}>{r.cuisine} · ⭐{r.rating}</div>
@@ -249,7 +245,7 @@ function HistoryPanel({ hist, restaurants, goToRestaurant, onClose, L }) {
   );
 }
 
-function Nav({ page, navigate, user, setUser, cart, lang, setLang, L, hist, restaurants, goToRestaurant, gifMode, setGifMode }) {
+function Nav({ page, navigate, user, setUser, cart, lang, setLang, L, hist, clearHistory, restaurants, goToRestaurant }) {
   const [histOpen, setHistOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [form, setForm] = useState({ email: "", pass: "", name: "" });
@@ -285,9 +281,6 @@ function Nav({ page, navigate, user, setUser, cart, lang, setLang, L, hist, rest
         </button>
 
         <div style={{ flex: 1, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 6, justifyContent: "flex-end" }}>
-          <button onClick={() => setGifMode((g) => !g)} style={{ background: gifMode ? "linear-gradient(135deg,#FF6B35,#F4A261)" : "#fff", color: gifMode ? "#fff" : T.saffron, border: `1px solid ${gifMode ? "#FF6B35" : T.saffron + "44"}`, borderRadius: 9, padding: "5px 10px", fontSize: 11, fontWeight: 800, cursor: "pointer", letterSpacing: 0.5 }}>
-            {gifMode ? L.gifOn : L.gifOff}
-          </button>
           <select value={lang} onChange={(e) => setLang(e.target.value)} style={{ border: `1px solid ${T.saffron}44`, borderRadius: 8, padding: "4px 7px", fontSize: 12, background: "#fff", cursor: "pointer" }}>
             <option value="en">EN</option>
             <option value="hi">हि</option>
@@ -295,7 +288,7 @@ function Nav({ page, navigate, user, setUser, cart, lang, setLang, L, hist, rest
           </select>
           <div style={{ position: "relative" }} ref={panelRef}>
             {btn(`🕐 ${L.history}${hist.length ? ` (${hist.length})` : ""}`, () => setHistOpen((o) => !o), histOpen, T.burgundy)}
-            {histOpen && <HistoryPanel hist={hist} restaurants={restaurants} goToRestaurant={goToRestaurant} onClose={() => setHistOpen(false)} L={L} />}
+            {histOpen && <HistoryPanel hist={hist} clearHistory={clearHistory} restaurants={restaurants} goToRestaurant={goToRestaurant} onClose={() => setHistOpen(false)} L={L} />}
           </div>
           {page !== "home" && (
             <button onClick={() => navigate("cart")} style={{ background: cartCount > 0 ? T.saffron : "#fff", color: cartCount > 0 ? "#fff" : T.saffron, border: `1px solid ${T.saffron}55`, borderRadius: 9, padding: "5px 11px", fontSize: 12, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 5 }}>
@@ -336,7 +329,7 @@ function Nav({ page, navigate, user, setUser, cart, lang, setLang, L, hist, rest
   );
 }
 
-function Home({ restaurants, goToRestaurant, L, gifMode, hist }) {
+function Home({ restaurants, goToRestaurant, L, hist }) {
   const [search, setSearch] = useState("");
   const filtered = restaurants.filter((r) => r.name.toLowerCase().includes(search.toLowerCase()) || r.cuisine.toLowerCase().includes(search.toLowerCase()) || r.city.toLowerCase().includes(search.toLowerCase()));
   const lastRest = hist.length ? restaurants.find((r) => r.id === hist[hist.length - 1]?.restId) : null;
@@ -373,7 +366,7 @@ function Home({ restaurants, goToRestaurant, L, gifMode, hist }) {
           <div key={r.id} onClick={() => goToRestaurant(r.id)} style={{ background: "#fff", borderRadius: 20, overflow: "hidden", border: `1px solid rgba(0,0,0,0.07)`, boxShadow: "0 2px 14px rgba(0,0,0,0.06)", cursor: "pointer", transition: "transform 0.2s,box-shadow 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(0,0,0,0.12)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 14px rgba(0,0,0,0.06)"; }}>
             
             <div style={{ height: "180px", position: "relative" }}>
-              <GifImage src={r.img} alt={r.name} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
+              <ProgressiveImage src={r.img} alt={r.name} style={{ width: "100%", height: "100%" }} />
               {r.popular && <div style={{ position: "absolute", top: 10, right: 10, background: T.saffron, color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 9px", borderRadius: 9 }}>⭐ Popular</div>}
               {hist.some((h) => h.restId === r.id) && <div style={{ position: "absolute", top: 10, left: 10, background: "rgba(0,0,0,0.65)", color: "#fff", fontSize: 9, fontWeight: 700, padding: "3px 8px", borderRadius: 7, letterSpacing: 0.5 }}>🕐 Visited</div>}
             </div>
@@ -402,7 +395,7 @@ function Home({ restaurants, goToRestaurant, L, gifMode, hist }) {
   );
 }
 
-function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, navigate }) {
+function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, navigate }) {
   const [search, setSearch] = useState("");
   const [cat, setCat] = useState("all");
   const [diet, setDiet] = useState("all");
@@ -452,7 +445,7 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, navi
     <div style={{ maxWidth: 900, margin: "0 auto" }}>
       <div style={{ position: "relative", background: T.charcoal }}>
         <div style={{ height: "240px", overflow: "hidden", position: "relative" }}>
-          <GifImage src={rest.img} alt={rest.name} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
+          <ProgressiveImage src={rest.img} alt={rest.name} style={{ width: "100%", height: "100%" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,transparent 15%,rgba(28,20,16,0.92))" }} />
         </div>
 
@@ -477,13 +470,20 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, navi
       </div>
 
       <div style={{ padding: "10px 14px 0", background: "#fff", borderBottom: `1px solid ${T.saffron}22`, position: "sticky", top: 56, zIndex: 100 }}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginBottom: 9 }}>
-          <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 7, background: T.cream, border: `1.5px solid ${listening ? T.saffron : T.saffron + "44"}`, borderRadius: 11, padding: "8px 13px", minWidth: "200px" }}>
-            <span style={{ color: "#bbb" }}>🔍</span>
-            <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder={L.search} style={{ border: "none", outline: "none", flex: 1, fontSize: 13, background: "transparent" }} />
-            <button onClick={startVoice} style={{ background: listening ? T.saffron : "transparent", border: `1px solid ${T.saffron}55`, borderRadius: 7, padding: "2px 7px", cursor: "pointer", fontSize: 14 }}>{listening ? "🔴" : "🎤"}</button>
+        
+        {/* 4. FIX FOR MOBILE SEARCH/MIC/FILTER OVERLAP */}
+        <div style={{ display: "flex", gap: "8px", marginBottom: "12px", alignItems: "center" }}>
+          
+          <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 7, background: T.cream, border: `1.5px solid ${listening ? T.saffron : T.saffron + "44"}`, borderRadius: 11, padding: "6px 12px" }}>
+            <span style={{ color: "#bbb", flexShrink: 0 }}>🔍</span>
+            {/* minWidth: 0 prevents the input from pushing the filter button off the screen */}
+            <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder={L.search} style={{ border: "none", outline: "none", flex: 1, fontSize: 14, background: "transparent", minWidth: 0 }} />
+            <button onClick={startVoice} style={{ background: listening ? T.saffron : "transparent", border: `1px solid ${T.saffron}55`, borderRadius: 7, padding: "4px 8px", cursor: "pointer", fontSize: 14, flexShrink: 0, display: "flex" }}>{listening ? "🔴" : "🎤"}</button>
           </div>
-          <button onClick={() => setShowFilters((f) => !f)} style={{ background: showFilters ? T.burgundy : "#fff", color: showFilters ? "#fff" : T.burgundy, border: `1px solid ${T.burgundy}44`, borderRadius: 11, padding: "8px 13px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>⚙ {L.filters}</button>
+          
+          <button onClick={() => setShowFilters((f) => !f)} style={{ flexShrink: 0, background: showFilters ? T.burgundy : "#fff", color: showFilters ? "#fff" : T.burgundy, border: `1px solid ${T.burgundy}44`, borderRadius: 11, padding: "0 14px", fontSize: 13, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", height: "38px" }}>
+            ⚙ {L.filters}
+          </button>
         </div>
 
         {listening && <p style={{ fontSize: 11, color: T.saffron, textAlign: "center", marginBottom: 6 }}>🎤 {L.speak}</p>}
@@ -595,7 +595,7 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, navi
 
                 <div style={{ width: "120px", flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
                   <div style={{ width: "120px", height: "120px", borderRadius: "16px", overflow: "hidden", position: "relative", boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}>
-                    <GifImage src={d.img} alt={nm(d, lang)} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
+                    <ProgressiveImage src={d.img} alt={nm(d, lang)} style={{ width: "100%", height: "100%" }} />
                   </div>
                   
                   <div style={{ marginTop: "-16px", zIndex: 2, width: "100%", display: "flex", justifyContent: "center" }}>
@@ -659,7 +659,7 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, navi
   );
 }
 
-function Cart({ cart, setCart, dishes, rest, L, navigate, lang, gifMode }) {
+function Cart({ cart, setCart, dishes, rest, L, navigate, lang }) {
   const items = Object.entries(cart).map(([id, qty]) => ({ dish: dishes.find((d) => d.id == id), qty })).filter((x) => x.dish && x.dish.restId === rest?.id);
   const total = items.reduce((s, { dish, qty }) => s + dish.price * qty, 0);
   const add = (id) => setCart((c) => ({ ...c, [id]: (c[id] || 0) + 1 }));
@@ -688,7 +688,7 @@ function Cart({ cart, setCart, dishes, rest, L, navigate, lang, gifMode }) {
           {items.map(({ dish, qty }) => (
             <div key={dish.id} style={{ background: "#fff", borderRadius: 16, border: `1px solid rgba(0,0,0,0.07)`, marginBottom: 11, padding: "14px", display: "flex", flexWrap: "wrap", gap: 13, alignItems: "center" }}>
               <div style={{ width: 62, height: 62, borderRadius: 11, overflow: "hidden", flexShrink: 0 }}>
-                <GifImage src={dish.img} alt={nm(dish, lang)} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
+                <ProgressiveImage src={dish.img} alt={nm(dish, lang)} style={{ width: "100%", height: "100%" }} />
               </div>
               <div style={{ flex: 1, minWidth: "150px" }}>
                 <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 2 }}>{nm(dish, lang)}</div>
@@ -722,7 +722,7 @@ function Cart({ cart, setCart, dishes, rest, L, navigate, lang, gifMode }) {
   );
 }
 
-function Admin({ restaurants, setRestaurants, dishes, setDishes, toast, gifMode }) {
+function Admin({ restaurants, setRestaurants, dishes, setDishes, toast }) {
   const [tab, setTab] = useState("restaurants");
   const [editRest, setEditRest] = useState(null);
   const [editDish, setEditDish] = useState(null);
@@ -762,7 +762,7 @@ function Admin({ restaurants, setRestaurants, dishes, setDishes, toast, gifMode 
   return (
     <div style={{ maxWidth: 980, margin: "0 auto", padding: "18px 14px" }}>
       <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: 24, color: T.burgundy, marginBottom: 4 }}>⚙ Admin Dashboard</h2>
-      <p style={{ fontSize: 13, color: T.warmGrey, marginBottom: 18 }}>Manage restaurants and dishes. GIF mode is <strong>{gifMode ? "ON" : "OFF"}</strong>.</p>
+      <p style={{ fontSize: 13, color: T.warmGrey, marginBottom: 18 }}>Manage restaurants and dishes.</p>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(130px,1fr))", gap: 11, marginBottom: 22 }}>
         {[[restaurants.length, "Restaurants", "🏠"], [dishes.length, "Dishes", "🍛"], [dishes.filter((d) => d.popular).length, "Bestsellers", "⭐"], [dishes.filter((d) => d.veg).length, "Veg Items", "🌿"]].map(([n, l, e]) => (
@@ -795,18 +795,14 @@ function Admin({ restaurants, setRestaurants, dishes, setDishes, toast, gifMode 
             <F label="Open Till" val={nr.openTill} onChange={(v) => setNr((p) => ({ ...p, openTill: v }))} />
             <F label="Emoji" val={nr.emoji} onChange={(v) => setNr((p) => ({ ...p, emoji: v }))} />
             <F label="Image URL" val={nr.img} onChange={(v) => setNr((p) => ({ ...p, img: v }))} />
-            <div style={{ marginBottom: 12 }}>
-              <div style={{ fontSize: 10, fontWeight: 700, color: T.warmGrey, marginBottom: 3, textTransform: "uppercase" }}>Upload Image</div>
-              <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files[0]; if (f) { const r = new FileReader(); r.onload = (ev) => setNr((p) => ({ ...p, img: ev.target.result })); r.readAsDataURL(f); } }} style={{ width: "100%", fontSize: 11 }} />
-            </div>
-            <button onClick={saveRest} style={{ width: "100%", background: T.saffron, color: "#fff", border: "none", borderRadius: 10, padding: "11px", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>{editRest ? "Update" : "Add"} Restaurant</button>
+            <button onClick={saveRest} style={{ width: "100%", background: T.saffron, color: "#fff", border: "none", borderRadius: 10, padding: "11px", fontSize: 14, fontWeight: 700, cursor: "pointer", marginTop: 10 }}>{editRest ? "Update" : "Add"} Restaurant</button>
             {editRest && <button onClick={() => { setEditRest(null); setNr(blank); }} style={{ width: "100%", background: "none", border: "none", fontSize: 12, color: T.warmGrey, cursor: "pointer", marginTop: 8 }}>Cancel</button>}
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
             {restaurants.map((r) => (
               <div key={r.id} style={{ background: "#fff", borderRadius: 13, padding: "12px 14px", border: `1px solid ${T.saffron}22`, display: "flex", gap: 11, alignItems: "center" }}>
                 <div style={{ width: 42, height: 42, borderRadius: 9, overflow: "hidden", flexShrink: 0 }}>
-                  <GifImage src={r.img} alt={r.name} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
+                  <ProgressiveImage src={r.img} alt={r.name} style={{ width: "100%", height: "100%" }} />
                 </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 700, fontSize: 14 }}>{r.emoji} {r.name}</div>
@@ -866,18 +862,15 @@ function Admin({ restaurants, setRestaurants, dishes, setDishes, toast, gifMode 
               <textarea value={nd.ingredients} onChange={(e) => setNd((p) => ({ ...p, ingredients: e.target.value }))} rows={2} style={{ width: "100%", border: `1px solid ${T.saffron}44`, borderRadius: 8, padding: "7px 9px", fontSize: 12, resize: "none", outline: "none" }} />
             </div>
             <F label="Image URL" val={nd.img} onChange={(v) => setNd((p) => ({ ...p, img: v }))} />
-            <div style={{ marginBottom: 13 }}>
-              <div style={{ fontSize: 10, fontWeight: 700, color: T.warmGrey, marginBottom: 3, textTransform: "uppercase" }}>Upload Image</div>
-              <input type="file" accept="image/*,video/*" onChange={(e) => { const f = e.target.files[0]; if (f) { const r = new FileReader(); r.onload = (ev) => setNd((p) => ({ ...p, img: ev.target.result })); r.readAsDataURL(f); } }} style={{ width: "100%", fontSize: 11 }} />
-            </div>
-            <button onClick={saveDish} style={{ width: "100%", background: T.saffron, color: "#fff", border: "none", borderRadius: 10, padding: "11px", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>{editDish ? "Update" : "Add"} Dish</button>
+            
+            <button onClick={saveDish} style={{ width: "100%", background: T.saffron, color: "#fff", border: "none", borderRadius: 10, padding: "11px", fontSize: 14, fontWeight: 700, cursor: "pointer", marginTop: 10 }}>{editDish ? "Update" : "Add"} Dish</button>
             {editDish && <button onClick={() => { setEditDish(null); setNd(blankD); }} style={{ width: "100%", background: "none", border: "none", fontSize: 12, color: T.warmGrey, cursor: "pointer", marginTop: 8 }}>Cancel</button>}
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8, maxHeight: "80vh", overflowY: "auto" }}>
             {dishes.map((d) => (
               <div key={d.id} style={{ background: "#fff", borderRadius: 12, padding: "11px 13px", border: `1px solid ${T.saffron}22`, display: "flex", gap: 10, alignItems: "center" }}>
                 <div style={{ width: 38, height: 38, borderRadius: 8, overflow: "hidden", flexShrink: 0 }}>
-                  <GifImage src={d.img} alt={d.name} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
+                  <ProgressiveImage src={d.img} alt={d.name} style={{ width: "100%", height: "100%" }} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontWeight: 700, fontSize: 13, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{d.name}</div>
@@ -901,32 +894,53 @@ export default function App() {
   const [restId, setRestId] = useState(null);
   const [user, setUser] = useState(null);
   
-  // Add LocalStorage for Cart and History
   const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("mg_cart") || "{}"));
   const [hist, setHist] = useState(() => JSON.parse(localStorage.getItem("mg_hist") || "[]"));
   
   const [lang, setLang] = useState("en");
   const [restaurants, setRestaurants] = useState(RESTS);
   const [dishes, setDishes] = useState(DISHES);
-  const [gifMode, setGifMode] = useState(false);
+  
   const toast = useToast();
   const L = LABELS[lang] || LABELS.en;
   
   const activeRest = restaurants.find((r) => r.id === restId);
 
-  // Save Cart & History to local storage whenever they change
   useEffect(() => localStorage.setItem("mg_cart", JSON.stringify(cart)), [cart]);
   useEffect(() => localStorage.setItem("mg_hist", JSON.stringify(hist)), [hist]);
 
-  // Global styles
+  // CSS for Shimmer Animation
   useEffect(() => {
     const s = document.createElement("style");
-    s.textContent = `@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}body{font-family:'DM Sans',sans-serif;background:#FDFAF5;-webkit-tap-highlight-color:transparent;}::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:#E8750A44;border-radius:4px}`;
+    s.textContent = `
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+      body{font-family:'DM Sans',sans-serif;background:#FDFAF5;-webkit-tap-highlight-color:transparent;}
+      ::-webkit-scrollbar{width:4px}
+      ::-webkit-scrollbar-thumb{background:#E8750A44;border-radius:4px}
+      @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    `;
     document.head.appendChild(s);
     return () => document.head.removeChild(s);
   }, []);
 
-  // NEW: HASH ROUTER LOGIC
+  const navToMenu = useCallback((id) => {
+    setRestId(id);
+    setPage("menu");
+    const now = new Date();
+    const time = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) + ", " + now.toLocaleDateString([], { month: "short", day: "numeric" });
+    setHist((h) => {
+      const filtered = h.filter((x) => x.restId !== id);
+      return [...filtered, { restId: id, time }].slice(-10);
+    });
+  }, []);
+
+  const clearHistory = useCallback(() => {
+    setHist([]);
+    localStorage.removeItem("mg_hist");
+    toast.show("History cleared!");
+  }, [toast]);
+
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
@@ -936,7 +950,6 @@ export default function App() {
         setRestId(id);
         setPage("menu");
         
-        // Auto add to history on direct URL visit
         const now = new Date();
         const time = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) + ", " + now.toLocaleDateString([], { month: "short", day: "numeric" });
         setHist((h) => {
@@ -955,12 +968,11 @@ export default function App() {
     };
 
     window.addEventListener("hashchange", handleHashChange);
-    handleHashChange(); // Run on initial load
+    handleHashChange();
 
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  // Use URL Hash for navigation instead of direct state updates
   const goToRestaurant = useCallback((id) => {
     window.location.hash = `#/menu/${id}`;
   }, []);
@@ -977,12 +989,12 @@ export default function App() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#FDFAF5" }}>
-      <Nav page={page} navigate={navigate} user={user} setUser={setUser} cart={cart} lang={lang} setLang={setLang} L={L} hist={hist} restaurants={restaurants} goToRestaurant={goToRestaurant} gifMode={gifMode} setGifMode={setGifMode} />
+      <Nav page={page} navigate={navigate} user={user} setUser={setUser} cart={cart} lang={lang} setLang={setLang} L={L} hist={hist} clearHistory={clearHistory} restaurants={restaurants} goToRestaurant={goToRestaurant} />
 
-      {page === "home" && <Home restaurants={restaurants} goToRestaurant={goToRestaurant} L={L} gifMode={gifMode} hist={hist} />}
-      {page === "menu" && activeRest && <Menu rest={activeRest} dishes={dishes} cart={cart} setCart={setCart} user={user} lang={lang} L={L} toast={toast} gifMode={gifMode} navigate={navigate} />}
-      {page === "cart" && <Cart cart={cart} setCart={setCart} dishes={dishes} rest={activeRest} L={L} navigate={navigate} lang={lang} gifMode={gifMode} />}
-      {page === "admin" && user?.isAdmin && <Admin restaurants={restaurants} setRestaurants={setRestaurants} dishes={dishes} setDishes={setDishes} toast={toast} gifMode={gifMode} />}
+      {page === "home" && <Home restaurants={restaurants} goToRestaurant={goToRestaurant} L={L} hist={hist} />}
+      {page === "menu" && activeRest && <Menu rest={activeRest} dishes={dishes} cart={cart} setCart={setCart} user={user} lang={lang} L={L} toast={toast} navigate={navigate} />}
+      {page === "cart" && <Cart cart={cart} setCart={setCart} dishes={dishes} rest={activeRest} L={L} navigate={navigate} lang={lang} />}
+      {page === "admin" && user?.isAdmin && <Admin restaurants={restaurants} setRestaurants={setRestaurants} dishes={dishes} setDishes={setDishes} toast={toast} />}
 
       <Toasts toasts={toast.toasts} />
     </div>
