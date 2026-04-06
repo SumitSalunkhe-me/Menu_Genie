@@ -15,9 +15,8 @@ const T = {
   white: "#FFFDF8",
 };
 
-// UPDATED IMAGES: Added new dishes and Korean restaurant imagery
+// IMAGES
 const IMG = {
-  // Existing Dishes
   paneerTikka: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&h=500&fit=crop&q=80",
   manchurian: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&h=500&fit=crop&q=80",
   butterChicken: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=500&h=500&fit=crop&q=80",
@@ -46,22 +45,16 @@ const IMG = {
   keemaPav: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&h=500&fit=crop&q=80",
   jalebi: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&h=500&fit=crop&q=80",
   masalaChai: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=500&h=500&fit=crop&q=80",
-
-  // New Mumbai Tadka Dishes
   bombaySandwich: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=500&h=500&fit=crop&q=80",
   bhelPuri: "https://images.unsplash.com/photo-1589302168068-964664d93cb0?w=500&h=500&fit=crop&q=80",
   misalPav: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&h=500&fit=crop&q=80",
   ragdaPattice: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&h=500&fit=crop&q=80",
   cuttingChai: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=500&h=500&fit=crop&q=80",
-
-  // New Green Bowl Dishes
   avocadoToast: "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=500&h=500&fit=crop&q=80",
   zoodles: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=500&h=500&fit=crop&q=80",
   acaiBowl: "https://images.unsplash.com/photo-1590301157890-4810ed35a4d7?w=500&h=500&fit=crop&q=80",
   matchaSmoothie: "https://images.unsplash.com/photo-1556881286-fc6915169721?w=500&h=500&fit=crop&q=80",
   sweetPotatoSoup: "https://images.unsplash.com/photo-1547592180-85f173990554?w=500&h=500&fit=crop&q=80",
-
-  // New Korean Restaurant & Dishes
   koreanRest: "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=800&h=450&fit=crop&q=80",
   kimchiStew: "https://images.unsplash.com/photo-1580651315530-69c8e0026377?w=500&h=500&fit=crop&q=80",
   bibimbap: "https://images.unsplash.com/photo-1553163147-622ab57be1c7?w=500&h=500&fit=crop&q=80",
@@ -69,7 +62,6 @@ const IMG = {
   koreanFriedChicken: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=500&h=500&fit=crop&q=80",
   bingsu: "https://images.unsplash.com/photo-1553452118-621e1f860f43?w=500&h=500&fit=crop&q=80",
 
-  // Existing Restaurants (16:9 Aspect Ratio)
   spiceGarden: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=450&fit=crop&q=80",
   mumbaiFoods: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=450&fit=crop&q=80",
   greenBowlRest: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=450&fit=crop&q=80",
@@ -105,18 +97,7 @@ function GifImage({ src, alt, style, gifMode }) {
 
   return (
     <div style={{ ...style, position: "relative", overflow: "hidden" }}>
-      <img
-        src={src}
-        alt={alt}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          transition: gifMode ? "transform 0.38s ease" : "transform 0.3s",
-          transform: `scale(${zoom})`,
-        }}
-        onError={(e) => { e.target.style.opacity = 0; }}
-      />
+      <img src={src} alt={alt} style={{ width: "100%", height: "100%", objectFit: "cover", transition: gifMode ? "transform 0.38s ease" : "transform 0.3s", transform: `scale(${zoom})` }} onError={(e) => { e.target.style.opacity = 0; }} />
       {gifMode && (
         <>
           <div style={{ position: "absolute", inset: 0, background: GIF_FRAMES[frame], transition: "background 0.32s", pointerEvents: "none" }} />
@@ -134,73 +115,64 @@ const RESTS = [
   { id: 4, name: "Tandoor Tales", cuisine: "Mughlai & North Indian", city: "Delhi", area: "Connaught Place", rating: 4.7, reviews: 1124, fssai: "10020042031456", openTill: "11:30 PM", emoji: "🔥", popular: true, img: IMG.tandoorTales, phone: "+91 99999 44444", location: { lat: 28.6315, lng: 77.2167 } },
   { id: 5, name: "Coastal Curry House", cuisine: "South Indian & Seafood", city: "Chennai", area: "T. Nagar", rating: 4.5, reviews: 689, fssai: "10020042055789", openTill: "10:30 PM", emoji: "🦐", popular: false, img: IMG.coastalCurry, phone: "+91 99999 55555", location: { lat: 13.0418, lng: 80.2341 } },
   { id: 6, name: "Street Bites Co.", cuisine: "Pan-Indian Street Food", city: "Bangalore", area: "Indiranagar", rating: 4.3, reviews: 478, fssai: "10020042078901", openTill: "11 PM", emoji: "🍢", popular: false, img: IMG.streetBites, phone: "+91 99999 66666", location: { lat: 12.9784, lng: 77.6408 } },
-  // New Korean Restaurant
   { id: 7, name: "Seoul Spice", cuisine: "Authentic Korean", city: "Pune", area: "Kalyani Nagar", rating: 4.9, reviews: 412, fssai: "10020042088888", openTill: "11 PM", emoji: "🥢", popular: true, img: IMG.koreanRest, phone: "+91 99999 77777", location: { lat: 18.5463, lng: 73.9033 } }
 ];
 
 const DISHES = [
-  // ── Spice Garden (restId: 1) ──────────────────────────────────────────────
-  { id: 1, restId: 1, cat: "starter", name: "Paneer Tikka", price: 220, popular: true, veg: true, spice: 2, desc: "Soft cottage cheese cubes marinated in spiced yogurt, chargrilled in a tandoor.", emoji: "🧀", calories: 310, health: "ok", prepTime: 15, allergens: ["dairy", "gluten"], ingredients: "Paneer, yogurt, ginger, garlic, cumin, kashmiri chilli, lemon juice, mustard oil, bell peppers.", rating: 4.8, reviews: 142, img: IMG.paneerTikka, nameHi: "पनीर टिक्का", nameMr: "पनीर टिक्का", descHi: "तंदूर में बनाया मसालेदार पनीर।", descMr: "तंदूरमध्ये पनीर." },
-  { id: 2, restId: 1, cat: "starter", name: "Veg Manchurian", price: 180, popular: false, veg: true, spice: 3, desc: "Crispy vegetable dumplings tossed in a tangy Indo-Chinese sauce.", emoji: "🥬", calories: 280, health: "ok", prepTime: 12, allergens: ["gluten", "soy"], ingredients: "Mixed vegetables, cornflour, soy sauce, garlic, ginger, green chilli, spring onion.", rating: 4.3, reviews: 89, img: IMG.manchurian, nameHi: "वेज मंचूरियन", nameMr: "वेज मंचुरियन", descHi: "तीखी चटनी में कुरकुरे बॉल्स।", descMr: "तिखट चटणीत भाजी बॉल्स." },
-  { id: 3, restId: 1, cat: "main", name: "Butter Chicken", price: 320, popular: true, veg: false, spice: 1, desc: "Tender chicken in a velvety tomato-cream sauce, slow-cooked with aromatic spices.", emoji: "🍗", calories: 480, health: "indulge", prepTime: 25, allergens: ["dairy", "nuts"], ingredients: "Chicken, tomatoes, cream, butter, cashews, onion, ginger, garlic, garam masala.", rating: 4.9, reviews: 318, img: IMG.butterChicken, nameHi: "बटर चिकन", nameMr: "बटर चिकन", descHi: "मलाईदार टमाटर सॉस में चिकन।", descMr: "मलईदार सॉसमध्ये चिकन." },
-  { id: 4, restId: 1, cat: "main", name: "Dal Makhani", price: 240, popular: false, veg: true, spice: 1, desc: "Black lentils slow-cooked overnight with butter and cream. Rich, smoky, comforting.", emoji: "🫘", calories: 360, health: "ok", prepTime: 20, allergens: ["dairy"], ingredients: "Black urad dal, rajma, butter, cream, tomatoes, onion, cumin.", rating: 4.7, reviews: 204, img: IMG.dalMakhani, nameHi: "दाल मखनी", nameMr: "दाल मखनी", descHi: "रात भर पकाई गई दाल।", descMr: "रात्रभर शिजवलेली दाल." },
-  { id: 5, restId: 1, cat: "main", name: "Palak Paneer", price: 260, popular: false, veg: true, spice: 1, desc: "Fresh cottage cheese in a silky spinach gravy, seasoned with garlic and mild spices.", emoji: "🥬", calories: 340, health: "great", prepTime: 18, allergens: ["dairy"], ingredients: "Spinach, paneer, onion, tomato, cream, garlic, ginger, cumin, coriander.", rating: 4.5, reviews: 167, img: IMG.palakPaneer, nameHi: "पालक पनीर", nameMr: "पालक पनीर", descHi: "पालक की मलाईदार पनीर।", descMr: "पालकाच्या ग्रेव्हीत पनीर." },
-  { id: 6, restId: 1, cat: "bread", name: "Butter Naan", price: 50, popular: true, veg: true, spice: 0, desc: "Leavened flatbread baked in tandoor, brushed generously with butter.", emoji: "🫓", calories: 180, health: "ok", prepTime: 8, allergens: ["gluten", "dairy", "egg"], ingredients: "Refined flour, yeast, yogurt, egg, sugar, salt, butter.", rating: 4.6, reviews: 410, img: IMG.naan, nameHi: "बटर नान", nameMr: "बटर नान", descHi: "तंदूर में बना नान।", descMr: "बटर नान." },
-  { id: 7, restId: 1, cat: "dessert", name: "Gulab Jamun", price: 90, popular: true, veg: true, spice: 0, desc: "Soft milk-solid dumplings soaked in rose-cardamom sugar syrup. Served warm.", emoji: "🍮", calories: 290, health: "indulge", prepTime: 5, allergens: ["dairy", "gluten"], ingredients: "Milk powder, khoya, flour, ghee, sugar, rose water, cardamom, saffron.", rating: 4.8, reviews: 256, img: IMG.gulabJamun, nameHi: "गुलाब जामुन", nameMr: "गुलाब जामून", descHi: "गुलाब चाशनी में मिठाई।", descMr: "गुलाब शर्बतात मिठाई." },
-  { id: 8, restId: 1, cat: "drinks", name: "Mango Lassi", price: 110, popular: true, veg: true, spice: 0, desc: "Thick chilled yogurt blended with ripe Alphonso mangoes. Naturally sweetened.", emoji: "🥭", calories: 210, health: "great", prepTime: 5, allergens: ["dairy"], ingredients: "Yogurt, Alphonso mango pulp, sugar, cardamom, ice, saffron.", rating: 4.9, reviews: 189, img: IMG.mangoLassi, nameHi: "मैंगो लस्सी", nameMr: "मँगो लस्सी", descHi: "आम और दही की लस्सी।", descMr: "आंबा लस्सी." },
+  // ── Spice Garden
+  { id: 1, restId: 1, cat: "starter", name: "Paneer Tikka", price: 220, popular: true, veg: true, spice: 2, desc: "Soft cottage cheese cubes marinated in spiced yogurt.", emoji: "🧀", calories: 310, health: "ok", prepTime: 15, allergens: ["dairy", "gluten"], ingredients: "Paneer, yogurt, ginger, garlic.", rating: 4.8, reviews: 142, img: IMG.paneerTikka, nameHi: "पनीर टिक्का", nameMr: "पनीर टिक्का", descHi: "तंदूर में बनाया मसालेदार पनीर।", descMr: "तंदूरमध्ये पनीर." },
+  { id: 2, restId: 1, cat: "starter", name: "Veg Manchurian", price: 180, popular: false, veg: true, spice: 3, desc: "Crispy vegetable dumplings tossed in a tangy sauce.", emoji: "🥬", calories: 280, health: "ok", prepTime: 12, allergens: ["gluten", "soy"], ingredients: "Mixed vegetables, cornflour, soy sauce.", rating: 4.3, reviews: 89, img: IMG.manchurian, nameHi: "वेज मंचूरियन", nameMr: "वेज मंचुरियन", descHi: "तीखी चटनी में कुरकुरे बॉल्स।", descMr: "तिखट चटणीत भाजी बॉल्स." },
+  { id: 3, restId: 1, cat: "main", name: "Butter Chicken", price: 320, popular: true, veg: false, spice: 1, desc: "Tender chicken in a velvety tomato-cream sauce.", emoji: "🍗", calories: 480, health: "indulge", prepTime: 25, allergens: ["dairy", "nuts"], ingredients: "Chicken, tomatoes, cream, butter.", rating: 4.9, reviews: 318, img: IMG.butterChicken, nameHi: "बटर चिकन", nameMr: "बटर चिकन", descHi: "मलाईदार टमाटर सॉस में चिकन।", descMr: "मलईदार सॉसमध्ये चिकन." },
+  { id: 4, restId: 1, cat: "main", name: "Dal Makhani", price: 240, popular: false, veg: true, spice: 1, desc: "Black lentils slow-cooked overnight with butter.", emoji: "🫘", calories: 360, health: "ok", prepTime: 20, allergens: ["dairy"], ingredients: "Black urad dal, rajma, butter, cream.", rating: 4.7, reviews: 204, img: IMG.dalMakhani, nameHi: "दाल मखनी", nameMr: "दाल मखनी", descHi: "रात भर पकाई गई दाल।", descMr: "रात्रभर शिजवलेली दाल." },
+  { id: 5, restId: 1, cat: "main", name: "Palak Paneer", price: 260, popular: false, veg: true, spice: 1, desc: "Fresh cottage cheese in a silky spinach gravy.", emoji: "🥬", calories: 340, health: "great", prepTime: 18, allergens: ["dairy"], ingredients: "Spinach, paneer, onion, cream.", rating: 4.5, reviews: 167, img: IMG.palakPaneer, nameHi: "पालक पनीर", nameMr: "पालक पनीर", descHi: "पालक की मलाईदार पनीर।", descMr: "पालकाच्या ग्रेव्हीत पनीर." },
+  { id: 6, restId: 1, cat: "bread", name: "Butter Naan", price: 50, popular: true, veg: true, spice: 0, desc: "Leavened flatbread brushed generously with butter.", emoji: "🫓", calories: 180, health: "ok", prepTime: 8, allergens: ["gluten", "dairy", "egg"], ingredients: "Refined flour, yeast, butter.", rating: 4.6, reviews: 410, img: IMG.naan, nameHi: "बटर नान", nameMr: "बटर नान", descHi: "तंदूर में बना नान।", descMr: "बटर नान." },
+  { id: 7, restId: 1, cat: "dessert", name: "Gulab Jamun", price: 90, popular: true, veg: true, spice: 0, desc: "Soft milk-solid dumplings soaked in sugar syrup.", emoji: "🍮", calories: 290, health: "indulge", prepTime: 5, allergens: ["dairy", "gluten"], ingredients: "Milk powder, sugar, cardamom.", rating: 4.8, reviews: 256, img: IMG.gulabJamun, nameHi: "गुलाब जामुन", nameMr: "गुलाब जामून", descHi: "गुलाब चाशनी में मिठाई।", descMr: "गुलाब शर्बतात मिठाई." },
+  { id: 8, restId: 1, cat: "drinks", name: "Mango Lassi", price: 110, popular: true, veg: true, spice: 0, desc: "Thick chilled yogurt blended with ripe mangoes.", emoji: "🥭", calories: 210, health: "great", prepTime: 5, allergens: ["dairy"], ingredients: "Yogurt, mango pulp, sugar.", rating: 4.9, reviews: 189, img: IMG.mangoLassi, nameHi: "मैंगो लस्सी", nameMr: "मँगो लस्सी", descHi: "आम और दही की लस्सी।", descMr: "आंबा लस्सी." },
 
-  // ── Mumbai Tadka (restId: 2) ───────────────────────────────────────────────
-  { id: 9, restId: 2, cat: "starter", name: "Pav Bhaji", price: 120, popular: true, veg: true, spice: 2, desc: "Spiced mashed vegetables with buttered pav buns. Mumbai's iconic street dish.", emoji: "🫕", calories: 380, health: "ok", prepTime: 10, allergens: ["gluten", "dairy"], ingredients: "Mixed vegetables, butter, pav bhaji masala, onion, tomato, lemon, pav buns.", rating: 4.7, reviews: 289, img: IMG.pavBhaji, nameHi: "पाव भाजी", nameMr: "पाव भाजी", descHi: "मुंबई की पाव भाजी।", descMr: "मुंबईची पाव भाजी." },
-  { id: 31, restId: 2, cat: "starter", name: "Bombay Toast Sandwich", price: 90, popular: true, veg: true, spice: 2, desc: "Layered sandwich with spiced potato, cucumber, tomato, and vibrant green chutney, grilled perfectly.", emoji: "🥪", calories: 320, health: "ok", prepTime: 8, allergens: ["gluten", "dairy"], ingredients: "White bread, butter, potato, cucumber, tomato, onion, mint-coriander chutney, sandwich masala.", rating: 4.6, reviews: 154, img: IMG.bombaySandwich, nameHi: "बॉम्बे सैंडविच", nameMr: "बॉम्बे सँडविच", descHi: "मसालेदार टोस्ट सैंडविच।", descMr: "मसालेदार टोस्ट सँडविच." },
-  { id: 32, restId: 2, cat: "starter", name: "Bhel Puri", price: 70, popular: false, veg: true, spice: 2, desc: "A tangy, crunchy mix of puffed rice, sev, chopped onions, and sweet-spicy chutneys.", emoji: "🍲", calories: 210, health: "great", prepTime: 5, allergens: ["gluten", "nuts"], ingredients: "Puffed rice, sev, puri, roasted peanuts, onion, tomato, tamarind chutney, green chutney.", rating: 4.5, reviews: 312, img: IMG.bhelPuri, nameHi: "भेल पूरी", nameMr: "भेळ पुरी", descHi: "चटपटी भेल पूरी।", descMr: "चटपटीत भेळ पुरी." },
-  { id: 33, restId: 2, cat: "main", name: "Misal Pav", price: 140, popular: true, veg: true, spice: 3, desc: "A fiery sprouted moth bean curry topped with crunchy farsan, served with soft pav and lemon.", emoji: "🍛", calories: 410, health: "indulge", prepTime: 12, allergens: ["gluten"], ingredients: "Sprouted moth beans, goda masala, farsan/sev, onion, coriander, lemon, pav buns, oil.", rating: 4.9, reviews: 521, img: IMG.misalPav, nameHi: "मिसल पाव", nameMr: "मिसळ पाव", descHi: "तीखी और मसालेदार मिसल पाव।", descMr: "झणझणीत मिसळ पाव." },
-  { id: 34, restId: 2, cat: "starter", name: "Ragda Pattice", price: 110, popular: false, veg: true, spice: 2, desc: "Pan-fried potato patties drowned in a mildly spiced white pea curry, topped with chutneys.", emoji: "🥔", calories: 340, health: "ok", prepTime: 10, allergens: ["gluten", "dairy"], ingredients: "White peas, potato, turmeric, ginger, garlic, tamarind chutney, mint chutney, sev.", rating: 4.6, reviews: 189, img: IMG.ragdaPattice, nameHi: "रगड़ा पैटीस", nameMr: "रगडा पॅटीस", descHi: "मटर और आलू की पैटीस।", descMr: "मटार आणि बटाट्याची पॅटीस." },
-  { id: 35, restId: 2, cat: "drinks", name: "Cutting Chai", price: 30, popular: true, veg: true, spice: 1, desc: "Half glass of strong, aromatic tea brewed with freshly pounded ginger and cardamom.", emoji: "☕", calories: 75, health: "ok", prepTime: 5, allergens: ["dairy"], ingredients: "Tea leaves, milk, water, ginger, green cardamom, sugar.", rating: 4.8, reviews: 840, img: IMG.cuttingChai, nameHi: "कटिंग चाय", nameMr: "कटिंग चहा", descHi: "कड़क अदरक वाली चाय।", descMr: "कडक आलं-वेलची चहा." },
+  // ── Mumbai Tadka
+  { id: 9, restId: 2, cat: "starter", name: "Pav Bhaji", price: 120, popular: true, veg: true, spice: 2, desc: "Spiced mashed vegetables with buttered pav buns.", emoji: "🫕", calories: 380, health: "ok", prepTime: 10, allergens: ["gluten", "dairy"], ingredients: "Mixed vegetables, butter, pav.", rating: 4.7, reviews: 289, img: IMG.pavBhaji, nameHi: "पाव भाजी", nameMr: "पाव भाजी", descHi: "मुंबई की पाव भाजी।", descMr: "मुंबईची पाव भाजी." },
+  { id: 31, restId: 2, cat: "starter", name: "Bombay Toast Sandwich", price: 90, popular: true, veg: true, spice: 2, desc: "Layered sandwich with spiced potato, cucumber, tomato.", emoji: "🥪", calories: 320, health: "ok", prepTime: 8, allergens: ["gluten", "dairy"], ingredients: "White bread, butter, potato, cucumber.", rating: 4.6, reviews: 154, img: IMG.bombaySandwich, nameHi: "बॉम्बे सैंडविच", nameMr: "बॉम्बे सँडविच", descHi: "मसालेदार टोस्ट सैंडविच।", descMr: "मसालेदार टोस्ट सँडविच." },
+  { id: 32, restId: 2, cat: "starter", name: "Bhel Puri", price: 70, popular: false, veg: true, spice: 2, desc: "A tangy, crunchy mix of puffed rice, sev, and onions.", emoji: "🍲", calories: 210, health: "great", prepTime: 5, allergens: ["gluten", "nuts"], ingredients: "Puffed rice, sev, puri, peanuts.", rating: 4.5, reviews: 312, img: IMG.bhelPuri, nameHi: "भेल पूरी", nameMr: "भेळ पुरी", descHi: "चटपटी भेल पूरी।", descMr: "चटपटीत भेळ पुरी." },
+  { id: 33, restId: 2, cat: "main", name: "Misal Pav", price: 140, popular: true, veg: true, spice: 3, desc: "A fiery sprouted moth bean curry topped with crunchy farsan.", emoji: "🍛", calories: 410, health: "indulge", prepTime: 12, allergens: ["gluten"], ingredients: "Sprouted moth beans, farsan, pav.", rating: 4.9, reviews: 521, img: IMG.misalPav, nameHi: "मिसल पाव", nameMr: "मिसळ पाव", descHi: "तीखी मिसल पाव।", descMr: "झणझणीत मिसळ पाव." },
+  { id: 34, restId: 2, cat: "starter", name: "Ragda Pattice", price: 110, popular: false, veg: true, spice: 2, desc: "Pan-fried potato patties drowned in a mildly spiced white pea curry.", emoji: "🥔", calories: 340, health: "ok", prepTime: 10, allergens: ["gluten", "dairy"], ingredients: "White peas, potato, turmeric, chutneys.", rating: 4.6, reviews: 189, img: IMG.ragdaPattice, nameHi: "रगड़ा पैटीस", nameMr: "रगडा पॅटीस", descHi: "मटर और आलू की पैटीस।", descMr: "मटार आणि बटाट्याची पॅटीस." },
+  { id: 35, restId: 2, cat: "drinks", name: "Cutting Chai", price: 30, popular: true, veg: true, spice: 1, desc: "Half glass of strong tea brewed with ginger and cardamom.", emoji: "☕", calories: 75, health: "ok", prepTime: 5, allergens: ["dairy"], ingredients: "Tea leaves, milk, ginger, cardamom.", rating: 4.8, reviews: 840, img: IMG.cuttingChai, nameHi: "कटिंग चाय", nameMr: "कटिंग चहा", descHi: "कड़क चाय।", descMr: "कडक चहा." },
 
-  // ── The Green Bowl (restId: 3) ─────────────────────────────────────────────
-  { id: 10, restId: 3, cat: "main", name: "Quinoa Buddha Bowl", price: 350, popular: true, veg: true, spice: 0, desc: "Wholesome quinoa with roasted veggies, hummus, avocado and tahini dressing.", emoji: "🥗", calories: 420, health: "great", prepTime: 15, allergens: ["nuts"], ingredients: "Quinoa, chickpeas, avocado, roasted bell peppers, hummus, tahini, lemon, olive oil.", rating: 4.9, reviews: 143, img: IMG.buddhaBowl, nameHi: "बुद्धा बाउल", nameMr: "बुद्धा बाउल", descHi: "स्वस्थ बुद्धा बाउल।", descMr: "पौष्टिक बाउल." },
-  { id: 36, restId: 3, cat: "starter", name: "Avocado Sourdough Toast", price: 280, popular: true, veg: true, spice: 1, desc: "Mashed Hass avocado on toasted artisanal sourdough, topped with cherry tomatoes and chilli flakes.", emoji: "🥑", calories: 310, health: "great", prepTime: 10, allergens: ["gluten"], ingredients: "Sourdough bread, Hass avocado, cherry tomatoes, olive oil, lemon juice, chilli flakes, sea salt.", rating: 4.8, reviews: 211, img: IMG.avocadoToast, nameHi: "एवोकाडो टोस्ट", nameMr: "अवोकॅडो टोस्ट", descHi: "एवोकाडो और खट्टी रोटी।", descMr: "अवोकॅडो आणि ब्रेड." },
-  { id: 37, restId: 3, cat: "main", name: "Zucchini Noodle Spaghetti", price: 320, popular: false, veg: true, spice: 1, desc: "Fresh spiraled zucchini noodles tossed in a rich, basil-walnut vegan pesto sauce.", emoji: "🍝", calories: 240, health: "great", prepTime: 12, allergens: ["nuts"], ingredients: "Zucchini, fresh basil, walnuts, olive oil, garlic, nutritional yeast, cherry tomatoes.", rating: 4.5, reviews: 87, img: IMG.zoodles, nameHi: "ज़ूकीनी नूडल्स", nameMr: "झुकिनी नूडल्स", descHi: "ताजा ज़ूकीनी नूडल्स।", descMr: "पौष्टिक झुकिनी नूडल्स." },
-  { id: 38, restId: 3, cat: "dessert", name: "Acai Berry Bowl", price: 380, popular: true, veg: true, spice: 0, desc: "Thick, chilled acai puree topped with fresh strawberries, bananas, granola, and chia seeds.", emoji: "🫐", calories: 350, health: "great", prepTime: 8, allergens: ["nuts", "gluten"], ingredients: "Frozen acai berries, banana, almond milk, strawberries, house-made granola, chia seeds.", rating: 4.9, reviews: 405, img: IMG.acaiBowl, nameHi: "अकाई बाउल", nameMr: "अकाई बाऊल", descHi: "ठंडा अकाई बेरी बाउल।", descMr: "थंड अकाई बेरी बाऊल." },
-  { id: 39, restId: 3, cat: "starter", name: "Roasted Sweet Potato Soup", price: 210, popular: false, veg: true, spice: 1, desc: "Creamy, dairy-free sweet potato soup blended with coconut milk and mild spices.", emoji: "🥣", calories: 180, health: "great", prepTime: 15, allergens: [], ingredients: "Sweet potato, coconut milk, vegetable broth, ginger, garlic, cumin, pumpkin seeds.", rating: 4.6, reviews: 120, img: IMG.sweetPotatoSoup, nameHi: "शकरकंद सूप", nameMr: "रताळ्याचे सूप", descHi: "मलाईदार शकरकंद सूप।", descMr: "पौष्टिक रताळ्याचे सूप." },
-  { id: 40, restId: 3, cat: "drinks", name: "Matcha Chia Smoothie", price: 240, popular: false, veg: true, spice: 0, desc: "Antioxidant-rich ceremonial matcha blended with spinach, banana, and oat milk.", emoji: "🍵", calories: 160, health: "great", prepTime: 5, allergens: ["nuts"], ingredients: "Ceremonial grade matcha, spinach, banana, oat milk, chia seeds, agave syrup.", rating: 4.7, reviews: 94, img: IMG.matchaSmoothie, nameHi: "माचा स्मूदी", nameMr: "माचा स्मूदी", descHi: "स्वस्थ माचा स्मूदी।", descMr: "पौष्टिक माचा स्मूदी." },
+  // ── The Green Bowl
+  { id: 10, restId: 3, cat: "main", name: "Quinoa Buddha Bowl", price: 350, popular: true, veg: true, spice: 0, desc: "Wholesome quinoa with roasted veggies, hummus, and avocado.", emoji: "🥗", calories: 420, health: "great", prepTime: 15, allergens: ["nuts"], ingredients: "Quinoa, chickpeas, avocado, hummus.", rating: 4.9, reviews: 143, img: IMG.buddhaBowl, nameHi: "बुद्धा बाउल", nameMr: "बुद्धा बाउल", descHi: "स्वस्थ बुद्धा बाउल।", descMr: "पौष्टिक बाउल." },
+  { id: 36, restId: 3, cat: "starter", name: "Avocado Sourdough Toast", price: 280, popular: true, veg: true, spice: 1, desc: "Mashed Hass avocado on toasted artisanal sourdough.", emoji: "🥑", calories: 310, health: "great", prepTime: 10, allergens: ["gluten"], ingredients: "Sourdough bread, avocado, tomatoes.", rating: 4.8, reviews: 211, img: IMG.avocadoToast, nameHi: "एवोकाडो टोस्ट", nameMr: "अवोकॅडो टोस्ट", descHi: "एवोकाडो रोटी।", descMr: "अवोकॅडो ब्रेड." },
+  { id: 37, restId: 3, cat: "main", name: "Zucchini Noodle Spaghetti", price: 320, popular: false, veg: true, spice: 1, desc: "Fresh spiraled zucchini noodles tossed in vegan pesto.", emoji: "🍝", calories: 240, health: "great", prepTime: 12, allergens: ["nuts"], ingredients: "Zucchini, basil, walnuts, garlic.", rating: 4.5, reviews: 87, img: IMG.zoodles, nameHi: "ज़ूकीनी नूडल्स", nameMr: "झुकिनी नूडल्स", descHi: "ताजा ज़ूकीनी नूडल्स।", descMr: "पौष्टिक झुकिनी नूडल्स." },
+  { id: 38, restId: 3, cat: "dessert", name: "Acai Berry Bowl", price: 380, popular: true, veg: true, spice: 0, desc: "Thick acai puree topped with strawberries and granola.", emoji: "🫐", calories: 350, health: "great", prepTime: 8, allergens: ["nuts", "gluten"], ingredients: "Acai, banana, almond milk, granola.", rating: 4.9, reviews: 405, img: IMG.acaiBowl, nameHi: "अकाई बाउल", nameMr: "अकाई बाऊल", descHi: "अकाई बेरी बाउल।", descMr: "अकाई बेरी बाऊल." },
+  { id: 39, restId: 3, cat: "starter", name: "Roasted Sweet Potato Soup", price: 210, popular: false, veg: true, spice: 1, desc: "Creamy, dairy-free sweet potato soup blended with coconut milk.", emoji: "🥣", calories: 180, health: "great", prepTime: 15, allergens: [], ingredients: "Sweet potato, coconut milk, garlic.", rating: 4.6, reviews: 120, img: IMG.sweetPotatoSoup, nameHi: "शकरकंद सूप", nameMr: "रताळ्याचे सूप", descHi: "शकरकंद सूप।", descMr: "रताळ्याचे सूप." },
+  { id: 40, restId: 3, cat: "drinks", name: "Matcha Chia Smoothie", price: 240, popular: false, veg: true, spice: 0, desc: "Antioxidant-rich matcha blended with spinach and oat milk.", emoji: "🍵", calories: 160, health: "great", prepTime: 5, allergens: ["nuts"], ingredients: "Matcha, spinach, oat milk, chia.", rating: 4.7, reviews: 94, img: IMG.matchaSmoothie, nameHi: "माचा स्मूदी", nameMr: "माचा स्मूदी", descHi: "माचा स्मूदी।", descMr: "माचा स्मूदी." },
 
-  // ── Seoul Spice (restId: 7) ───────────────────────────────────────────────
-  { id: 41, restId: 7, cat: "main", name: "Kimchi Jjigae (Stew)", price: 420, popular: true, veg: true, spice: 3, desc: "A robust and spicy traditional stew made with aged kimchi, tofu, mushrooms, and scallions.", emoji: "🍲", calories: 310, health: "great", prepTime: 20, allergens: ["soy"], ingredients: "Aged vegetarian kimchi, firm tofu, enoki mushrooms, gochugaru, scallions, vegetable broth.", rating: 4.8, reviews: 312, img: IMG.kimchiStew, nameHi: "किमची स्टू", nameMr: "किमची स्ट्यू", descHi: "मसालेदार कोरियाई सूप।", descMr: "मसालेदार कोरियन सूप." },
-  { id: 42, restId: 7, cat: "main", name: "Chicken Bibimbap", price: 480, popular: true, veg: false, spice: 2, desc: "Warm rice topped with seasoned vegetables, marinated chicken, gochujang sauce, and a fried egg.", emoji: "🍱", calories: 540, health: "ok", prepTime: 18, allergens: ["egg", "soy", "gluten"], ingredients: "Short-grain rice, chicken, spinach, bean sprouts, carrots, fried egg, gochujang, sesame oil.", rating: 4.9, reviews: 543, img: IMG.bibimbap, nameHi: "चिकन बिबिंबप", nameMr: "चिकन बिबिंबप", descHi: "सब्जियों और चिकन के साथ चावल।", descMr: "भाज्या आणि चिकन सोबत भात." },
-  { id: 43, restId: 7, cat: "starter", name: "Tteokbokki", price: 340, popular: true, veg: true, spice: 3, desc: "Chewy cylindrical rice cakes simmered in a fiery, sweet, and thick gochujang chilli sauce.", emoji: "🥢", calories: 410, health: "indulge", prepTime: 15, allergens: ["soy", "gluten"], ingredients: "Korean rice cakes (garaetteok), gochujang, sugar, soy sauce, scallions, sesame seeds.", rating: 4.7, reviews: 298, img: IMG.tteokbokki, nameHi: "त्तेओकबोक्की", nameMr: "टोक्बोक्की", descHi: "तीखे चावल के केक।", descMr: "तिखट राईस केक." },
-  { id: 44, restId: 7, cat: "starter", name: "Yangnyeom Fried Chicken", price: 410, popular: true, veg: false, spice: 2, desc: "Ultra-crispy double-fried chicken wings coated in a sticky, sweet, and mildly spicy glaze.", emoji: "🍗", calories: 620, health: "indulge", prepTime: 22, allergens: ["soy", "gluten"], ingredients: "Chicken wings, potato starch, gochujang, garlic, ginger, honey, soy sauce, peanuts.", rating: 4.9, reviews: 611, img: IMG.koreanFriedChicken, nameHi: "कोरियन फ्राइड चिकन", nameMr: "कोरियन फ्राईड चिकन", descHi: "कुरकुरा मीठा-तीखा चिकन।", descMr: "कुरकुरीत गोड-तिखट चिकन." },
-  { id: 45, restId: 7, cat: "dessert", name: "Mango Bingsu", price: 350, popular: false, veg: true, spice: 0, desc: "A mountain of fluffy milk snow ice topped with fresh diced mangoes and condensed milk.", emoji: "🍧", calories: 380, health: "indulge", prepTime: 10, allergens: ["dairy"], ingredients: "Frozen milk, fresh mango chunks, sweetened condensed milk, vanilla ice cream.", rating: 4.6, reviews: 156, img: IMG.bingsu, nameHi: "मैंगो बिंगसू", nameMr: "मँगो बिंगसू", descHi: "मैंगो स्नो आइस डेज़र्ट।", descMr: "मँगो स्नो आईस डेझर्ट." },
+  // ── Seoul Spice (Korean)
+  { id: 41, restId: 7, cat: "main", name: "Kimchi Jjigae", price: 420, popular: true, veg: true, spice: 3, desc: "Spicy traditional stew made with aged kimchi and tofu.", emoji: "🍲", calories: 310, health: "great", prepTime: 20, allergens: ["soy"], ingredients: "Kimchi, tofu, mushrooms, gochugaru.", rating: 4.8, reviews: 312, img: IMG.kimchiStew, nameHi: "किमची स्टू", nameMr: "किमची स्ट्यू", descHi: "मसालेदार सूप।", descMr: "मसालेदार सूप." },
+  { id: 42, restId: 7, cat: "main", name: "Chicken Bibimbap", price: 480, popular: true, veg: false, spice: 2, desc: "Rice topped with vegetables, chicken, gochujang sauce, and an egg.", emoji: "🍱", calories: 540, health: "ok", prepTime: 18, allergens: ["egg", "soy", "gluten"], ingredients: "Rice, chicken, spinach, egg, gochujang.", rating: 4.9, reviews: 543, img: IMG.bibimbap, nameHi: "चिकन बिबिंबप", nameMr: "चिकन बिबिंबप", descHi: "चिकन चावल।", descMr: "चिकन भात." },
+  { id: 43, restId: 7, cat: "starter", name: "Tteokbokki", price: 340, popular: true, veg: true, spice: 3, desc: "Chewy rice cakes simmered in a fiery chilli sauce.", emoji: "🥢", calories: 410, health: "indulge", prepTime: 15, allergens: ["soy", "gluten"], ingredients: "Rice cakes, gochujang, scallions.", rating: 4.7, reviews: 298, img: IMG.tteokbokki, nameHi: "त्तेओकबोक्की", nameMr: "टोक्बोक्की", descHi: "तीखे चावल केक।", descMr: "तिखट राईस केक." },
+  { id: 44, restId: 7, cat: "starter", name: "Yangnyeom Fried Chicken", price: 410, popular: true, veg: false, spice: 2, desc: "Double-fried chicken wings in a sticky, sweet, and spicy glaze.", emoji: "🍗", calories: 620, health: "indulge", prepTime: 22, allergens: ["soy", "gluten"], ingredients: "Chicken, gochujang, honey, garlic.", rating: 4.9, reviews: 611, img: IMG.koreanFriedChicken, nameHi: "फ्राइड चिकन", nameMr: "फ्राईड चिकन", descHi: "मसालेदार चिकन।", descMr: "मसालेदार चिकन." },
+  { id: 45, restId: 7, cat: "dessert", name: "Mango Bingsu", price: 350, popular: false, veg: true, spice: 0, desc: "Fluffy milk snow ice topped with fresh mangoes and condensed milk.", emoji: "🍧", calories: 380, health: "indulge", prepTime: 10, allergens: ["dairy"], ingredients: "Frozen milk, mango, condensed milk.", rating: 4.6, reviews: 156, img: IMG.bingsu, nameHi: "मैंगो बिंगसू", nameMr: "मँगो बिंगसू", descHi: "मैंगो आइस डेज़र्ट।", descMr: "मँगो आईस डेझर्ट." },
 
-  // ── Tandoor Tales (restId: 4) ─────────────────────────────────────────────
-  { id: 11, restId: 4, cat: "starter", name: "Seekh Kebab", price: 280, popular: true, veg: false, spice: 2, desc: "Minced lamb and beef skewers seasoned with fresh herbs, grilled over live charcoal.", emoji: "🍢", calories: 340, health: "ok", prepTime: 18, allergens: ["gluten"], ingredients: "Minced lamb, onion, green chilli, coriander, ginger, garlic, garam masala, chaat masala.", rating: 4.8, reviews: 203, img: IMG.seekhKebab, nameHi: "सीख कबाब", nameMr: "सीख कबाब", descHi: "चारकोल पर ग्रिल्ड सीख कबाब।", descMr: "कोळशावर ग्रील्ड सीख कबाब." },
-  { id: 12, restId: 4, cat: "starter", name: "Paneer Malai Tikka", price: 260, popular: false, veg: true, spice: 1, desc: "Cottage cheese marinated in cream and mild spices, gently cooked in a clay oven.", emoji: "🧀", calories: 330, health: "ok", prepTime: 16, allergens: ["dairy", "gluten"], ingredients: "Paneer, malai, cardamom, white pepper, kasuri methi, ginger, garlic, lemon.", rating: 4.6, reviews: 117, img: IMG.paneerTikka, nameHi: "पनीर मलाई टिक्का", nameMr: "पनीर मलाई टिक्का", descHi: "मलाई में पनीर टिक्का।", descMr: "मलईत पनीर टिक्का." },
-  { id: 13, restId: 4, cat: "main", name: "Mughlai Chicken Korma", price: 380, popular: true, veg: false, spice: 1, desc: "Slow-braised chicken in a rich almond-saffron gravy, perfumed with rose water.", emoji: "🍗", calories: 520, health: "indulge", prepTime: 30, allergens: ["dairy", "nuts"], ingredients: "Chicken, almond paste, saffron, cream, onion, cardamom, rose water, cashews, ghee.", rating: 4.9, reviews: 334, img: IMG.mughlaiChicken, nameHi: "मुगलई चिकन कोरमा", nameMr: "मुगलई चिकन कोरमा", descHi: "शाही बादाम-केसर ग्रेवी में चिकन।", descMr: "बदाम-केशर ग्रेव्हीत चिकन." },
-  { id: 14, restId: 4, cat: "main", name: "Dum Biryani", price: 420, popular: true, veg: false, spice: 2, desc: "Fragrant basmati layered with slow-cooked mutton, sealed and steamed in the dum style.", emoji: "🍚", calories: 610, health: "indulge", prepTime: 35, allergens: ["dairy", "gluten"], ingredients: "Basmati rice, mutton, caramelised onions, saffron milk, ghee, whole spices, mint.", rating: 4.9, reviews: 412, img: IMG.biryani, nameHi: "दम बिरयानी", nameMr: "दम बिर्याणी", descHi: "दम स्टाइल मटन बिरयानी।", descMr: "दम स्टाईल मटण बिर्याणी." },
-  { id: 15, restId: 4, cat: "bread", name: "Roomali Roti", price: 40, popular: false, veg: true, spice: 0, desc: "Wafer-thin handkerchief bread folded and served warm, perfect for scooping rich gravies.", emoji: "🫓", calories: 120, health: "ok", prepTime: 7, allergens: ["gluten"], ingredients: "Whole wheat flour, refined flour, salt, water, oil.", rating: 4.4, reviews: 198, img: IMG.naan, nameHi: "रूमाली रोटी", nameMr: "रूमाली रोटी", descHi: "पतली रूमाली रोटी।", descMr: "पातळ रूमाली रोटी." },
-  { id: 16, restId: 4, cat: "dessert", name: "Sheer Khurma", price: 130, popular: false, veg: true, spice: 0, desc: "Silky vermicelli pudding cooked in whole milk with dates, nuts and saffron strands.", emoji: "🍮", calories: 380, health: "indulge", prepTime: 12, allergens: ["dairy", "nuts", "gluten"], ingredients: "Vermicelli, full-fat milk, dates, almonds, pistachios, saffron, cardamom, ghee, sugar.", rating: 4.7, reviews: 145, img: IMG.sheerKhorma, nameHi: "शीर खुरमा", nameMr: "शीर खुरमा", descHi: "सेवई का हलवा।", descMr: "सेवईची खीर." },
-  { id: 17, restId: 4, cat: "drinks", name: "Rose Sharbat", price: 80, popular: true, veg: true, spice: 0, desc: "Chilled rose-flavoured drink with basil seeds, a cooling Mughal court favourite.", emoji: "🌹", calories: 140, health: "ok", prepTime: 3, allergens: [], ingredients: "Rose syrup, sabja seeds, chilled water, lemon, ice, sugar.", rating: 4.5, reviews: 92, img: IMG.roohAfza, nameHi: "गुलाब शरबत", nameMr: "गुलाब शर्बत", descHi: "गुलाब का ठंडा शरबत।", descMr: "थंड गुलाब शर्बत." },
+  // ── Tandoor Tales
+  { id: 11, restId: 4, cat: "starter", name: "Seekh Kebab", price: 280, popular: true, veg: false, spice: 2, desc: "Minced lamb skewers seasoned with herbs, grilled over charcoal.", emoji: "🍢", calories: 340, health: "ok", prepTime: 18, allergens: ["gluten"], ingredients: "Minced lamb, onion, garam masala.", rating: 4.8, reviews: 203, img: IMG.seekhKebab, nameHi: "सीख कबाब", nameMr: "सीख कबाब", descHi: "ग्रिल्ड कबाब।", descMr: "ग्रील्ड कबाब." },
+  { id: 12, restId: 4, cat: "starter", name: "Paneer Malai Tikka", price: 260, popular: false, veg: true, spice: 1, desc: "Cottage cheese marinated in cream and mild spices.", emoji: "🧀", calories: 330, health: "ok", prepTime: 16, allergens: ["dairy", "gluten"], ingredients: "Paneer, malai, cardamom.", rating: 4.6, reviews: 117, img: IMG.paneerTikka, nameHi: "पनीर मलाई टिक्का", nameMr: "पनीर मलाई टिक्का", descHi: "मलाई पनीर टिक्का।", descMr: "मलई पनीर टिक्का." },
+  { id: 13, restId: 4, cat: "main", name: "Mughlai Chicken Korma", price: 380, popular: true, veg: false, spice: 1, desc: "Slow-braised chicken in a rich almond-saffron gravy.", emoji: "🍗", calories: 520, health: "indulge", prepTime: 30, allergens: ["dairy", "nuts"], ingredients: "Chicken, almond paste, saffron.", rating: 4.9, reviews: 334, img: IMG.mughlaiChicken, nameHi: "चिकन कोरमा", nameMr: "चिकन कोरमा", descHi: "शाही चिकन।", descMr: "शाही चिकन." },
+  { id: 14, restId: 4, cat: "main", name: "Dum Biryani", price: 420, popular: true, veg: false, spice: 2, desc: "Fragrant basmati layered with slow-cooked mutton.", emoji: "🍚", calories: 610, health: "indulge", prepTime: 35, allergens: ["dairy", "gluten"], ingredients: "Basmati rice, mutton, saffron.", rating: 4.9, reviews: 412, img: IMG.biryani, nameHi: "दम बिरयानी", nameMr: "दम बिर्याणी", descHi: "मटन बिरयानी।", descMr: "मटण बिर्याणी." },
 
-  // ── Coastal Curry House (restId: 5) ───────────────────────────────────────
-  { id: 18, restId: 5, cat: "starter", name: "Masala Dosa", price: 140, popular: true, veg: true, spice: 2, desc: "Crispy golden crepe made from fermented rice-lentil batter, filled with spiced potato.", emoji: "🥞", calories: 290, health: "ok", prepTime: 14, allergens: ["gluten"], ingredients: "Rice, urad dal, potato masala, mustard seeds, curry leaves, onion, turmeric, oil.", rating: 4.8, reviews: 267, img: IMG.dosaMasala, nameHi: "मसाला डोसा", nameMr: "मसाला डोसा", descHi: "कुरकुरा मसाला डोसा।", descMr: "कुरकुरीत मसाला डोसा." },
-  { id: 19, restId: 5, cat: "starter", name: "Prawns Koliwada", price: 310, popular: true, veg: false, spice: 3, desc: "Tiger prawns coated in spiced chickpea batter and deep-fried until crispy and golden.", emoji: "🦐", calories: 370, health: "ok", prepTime: 16, allergens: ["gluten"], ingredients: "Tiger prawns, chickpea flour, red chilli, turmeric, ajwain, ginger-garlic paste, lemon.", rating: 4.7, reviews: 189, img: IMG.prawnsKoliwada, nameHi: "झींगे कोलीवाडा", nameMr: "कोळंबी कोलीवाडा", descHi: "मसालेदार झींगे।", descMr: "मसालेदार कोळंबी." },
-  { id: 20, restId: 5, cat: "main", name: "Chettinad Chicken", price: 340, popular: false, veg: false, spice: 3, desc: "Fiery South Indian curry with whole spices, kalpasi and star anise — bold and aromatic.", emoji: "🍗", calories: 460, health: "ok", prepTime: 28, allergens: [], ingredients: "Chicken, kalpasi, star anise, marathi mokku, coconut paste, curry leaves, black pepper.", rating: 4.6, reviews: 153, img: IMG.chettinadChicken, nameHi: "चेट्टीनाड चिकन", nameMr: "चेट्टीनाड चिकन", descHi: "दक्षिण भारतीय चेट्टीनाड चिकन।", descMr: "दक्षिण भारतीय चेट्टीनाड चिकन." },
-  { id: 21, restId: 5, cat: "main", name: "Sambar Rice", price: 160, popular: false, veg: true, spice: 1, desc: "Comforting steamed rice served with piping hot lentil-vegetable sambar and ghee.", emoji: "🍚", calories: 340, health: "great", prepTime: 15, allergens: [], ingredients: "Parboiled rice, toor dal, tamarind, tomato, onion, drumstick, sambar powder, ghee.", rating: 4.5, reviews: 198, img: IMG.sambarRice, nameHi: "सांभर राइस", nameMr: "सांभर राइस", descHi: "सांभर के साथ चावल।", descMr: "सांभर राइस." },
-  { id: 22, restId: 5, cat: "bread", name: "Appam with Coconut Milk", price: 90, popular: false, veg: true, spice: 0, desc: "Lacy fermented rice hoppers served with sweetened coconut milk — a Kerala breakfast staple.", emoji: "🥛", calories: 210, health: "ok", prepTime: 10, allergens: [], ingredients: "Raw rice, coconut milk, yeast, sugar, salt, coconut cream.", rating: 4.4, reviews: 102, img: IMG.coconutChutney, nameHi: "अप्पम", nameMr: "अप्पम", descHi: "नारियल दूध के साथ अप्पम।", descMr: "नारळाच्या दुधासह अप्पम." },
-  { id: 23, restId: 5, cat: "dessert", name: "Rassmalai", price: 110, popular: true, veg: true, spice: 0, desc: "Soft chenna patties soaked in chilled saffron-cardamom milk, garnished with pistachios.", emoji: "🍮", calories: 260, health: "indulge", prepTime: 5, allergens: ["dairy"], ingredients: "Chenna, full-fat milk, sugar, saffron, cardamom, pistachios, rose water.", rating: 4.8, reviews: 176, img: IMG.rassmalai, nameHi: "रसमलाई", nameMr: "रसमलाई", descHi: "केसर दूध में रसमलाई।", descMr: "केशर दुधात रसमलाई." },
-  { id: 24, restId: 5, cat: "drinks", name: "Filter Coffee", price: 70, popular: true, veg: true, spice: 0, desc: "Strong South Indian decoction mixed with hot frothed milk, served in a traditional davara.", emoji: "☕", calories: 90, health: "ok", prepTime: 5, allergens: ["dairy"], ingredients: "Chicory coffee blend, hot milk, sugar.", rating: 4.9, reviews: 312, img: IMG.filterCoffee, nameHi: "फिल्टर कॉफी", nameMr: "फिल्टर कॉफी", descHi: "दक्षिण भारतीय फिल्टर कॉफी।", descMr: "साउथ इंडियन फिल्टर कॉफी." },
+  // ── Coastal Curry House
+  { id: 18, restId: 5, cat: "starter", name: "Masala Dosa", price: 140, popular: true, veg: true, spice: 2, desc: "Crispy crepe made from rice-lentil batter, filled with potato.", emoji: "🥞", calories: 290, health: "ok", prepTime: 14, allergens: ["gluten"], ingredients: "Rice, urad dal, potato masala.", rating: 4.8, reviews: 267, img: IMG.dosaMasala, nameHi: "मसाला डोसा", nameMr: "मसाला डोसा", descHi: "मसाला डोसा।", descMr: "मसाला डोसा." },
+  { id: 19, restId: 5, cat: "starter", name: "Prawns Koliwada", price: 310, popular: true, veg: false, spice: 3, desc: "Tiger prawns coated in spiced chickpea batter and deep-fried.", emoji: "🦐", calories: 370, health: "ok", prepTime: 16, allergens: ["gluten"], ingredients: "Prawns, chickpea flour, spices.", rating: 4.7, reviews: 189, img: IMG.prawnsKoliwada, nameHi: "झींगे कोलीवाडा", nameMr: "कोळंबी कोलीवाडा", descHi: "मसालेदार झींगे।", descMr: "मसालेदार कोळंबी." },
+  { id: 20, restId: 5, cat: "main", name: "Chettinad Chicken", price: 340, popular: false, veg: false, spice: 3, desc: "Fiery South Indian curry with whole spices.", emoji: "🍗", calories: 460, health: "ok", prepTime: 28, allergens: [], ingredients: "Chicken, spices, coconut paste.", rating: 4.6, reviews: 153, img: IMG.chettinadChicken, nameHi: "चेट्टीनाड चिकन", nameMr: "चेट्टीनाड चिकन", descHi: "चेट्टीनाड चिकन।", descMr: "चेट्टीनाड चिकन." },
+  { id: 24, restId: 5, cat: "drinks", name: "Filter Coffee", price: 70, popular: true, veg: true, spice: 0, desc: "Strong South Indian decoction mixed with hot frothed milk.", emoji: "☕", calories: 90, health: "ok", prepTime: 5, allergens: ["dairy"], ingredients: "Coffee, milk, sugar.", rating: 4.9, reviews: 312, img: IMG.filterCoffee, nameHi: "फिल्टर कॉफी", nameMr: "फिल्टर कॉफी", descHi: "फिल्टर कॉफी।", descMr: "फिल्टर कॉफी." },
 
-  // ── Street Bites Co. (restId: 6) ─────────────────────────────────────────
-  { id: 25, restId: 6, cat: "starter", name: "Vada Pav", price: 60, popular: true, veg: true, spice: 2, desc: "Crispy spiced potato fritter sandwiched in a soft pav with green and tamarind chutneys.", emoji: "🍔", calories: 290, health: "ok", prepTime: 8, allergens: ["gluten", "dairy"], ingredients: "Potato, besan, mustard seeds, green chilli, garlic, pav buns, coriander chutney, tamarind.", rating: 4.6, reviews: 221, img: IMG.vadaPav, nameHi: "वड़ा पाव", nameMr: "वडा पाव", descHi: "मुंबई का वड़ा पाव।", descMr: "मुंबईचा वडा पाव." },
-  { id: 26, restId: 6, cat: "starter", name: "Pani Puri", price: 70, popular: true, veg: true, spice: 3, desc: "Hollow crispy puris filled with tangy mint water, mashed potato and sprouted moong.", emoji: "🫧", calories: 190, health: "ok", prepTime: 5, allergens: ["gluten"], ingredients: "Semolina puris, mint water, tamarind water, potato, chickpeas, sprouted moong, chaat masala.", rating: 4.8, reviews: 309, img: IMG.paniPuri, nameHi: "पानी पूरी", nameMr: "पाणी पुरी", descHi: "तीखी पानी पूरी।", descMr: "झणझणीत पाणी पुरी." },
-  { id: 27, restId: 6, cat: "main", name: "Chole Bhature", price: 150, popular: false, veg: true, spice: 2, desc: "Puffed deep-fried bread paired with spicy chickpea masala. A Punjabi street-food legend.", emoji: "🫘", calories: 520, health: "indulge", prepTime: 18, allergens: ["gluten", "dairy"], ingredients: "Chickpeas, bhature dough, onion, tomato, dried mango powder, black cardamom, ginger.", rating: 4.5, reviews: 142, img: IMG.chole, nameHi: "छोले भटूरे", nameMr: "छोले भटुरे", descHi: "पंजाबी छोले भटूरे।", descMr: "पंजाबी छोले भटुरे." },
-  { id: 28, restId: 6, cat: "main", name: "Keema Pav", price: 170, popular: true, veg: false, spice: 2, desc: "Spiced minced mutton cooked with peas and tomatoes, served with buttered pav.", emoji: "🍞", calories: 430, health: "ok", prepTime: 20, allergens: ["gluten", "dairy"], ingredients: "Minced mutton, peas, tomato, onion, green chilli, garam masala, butter, pav.", rating: 4.7, reviews: 188, img: IMG.keemaPav, nameHi: "कीमा पाव", nameMr: "कीमा पाव", descHi: "मटन कीमा पाव।", descMr: "मटण कीमा पाव." },
-  { id: 29, restId: 6, cat: "dessert", name: "Jalebi", price: 80, popular: false, veg: true, spice: 0, desc: "Crispy fermented batter spirals soaked in warm saffron sugar syrup. Best eaten hot.", emoji: "🍩", calories: 310, health: "indulge", prepTime: 6, allergens: ["gluten", "dairy"], ingredients: "Refined flour, curd, baking powder, saffron, sugar, ghee, cardamom, rose water.", rating: 4.5, reviews: 134, img: IMG.jalebi, nameHi: "जलेबी", nameMr: "जलेबी", descHi: "गरम जलेबी।", descMr: "गरम जिलेबी." },
-  { id: 30, restId: 6, cat: "drinks", name: "Masala Chai", price: 50, popular: true, veg: true, spice: 1, desc: "Strong CTC tea brewed with ginger, cardamom and milk — the ultimate Indian comfort drink.", emoji: "🍵", calories: 80, health: "ok", prepTime: 5, allergens: ["dairy"], ingredients: "CTC tea, milk, ginger, cardamom, black pepper, cloves, sugar.", rating: 4.8, reviews: 287, img: IMG.masalaChai, nameHi: "मसाला चाय", nameMr: "मसाला चहा", descHi: "अदरक मसाला चाय।", descMr: "आलं मसाला चहा." },
+  // ── Street Bites Co.
+  { id: 25, restId: 6, cat: "starter", name: "Vada Pav", price: 60, popular: true, veg: true, spice: 2, desc: "Crispy spiced potato fritter sandwiched in a soft pav.", emoji: "🍔", calories: 290, health: "ok", prepTime: 8, allergens: ["gluten", "dairy"], ingredients: "Potato, besan, pav buns.", rating: 4.6, reviews: 221, img: IMG.vadaPav, nameHi: "वड़ा पाव", nameMr: "वडा पाव", descHi: "वड़ा पाव।", descMr: "वडा पाव." },
+  { id: 26, restId: 6, cat: "starter", name: "Pani Puri", price: 70, popular: true, veg: true, spice: 3, desc: "Hollow crispy puris filled with tangy mint water.", emoji: "🫧", calories: 190, health: "ok", prepTime: 5, allergens: ["gluten"], ingredients: "Puris, mint water, potato.", rating: 4.8, reviews: 309, img: IMG.paniPuri, nameHi: "पानी पूरी", nameMr: "पाणी पुरी", descHi: "पानी पूरी।", descMr: "पाणी पुरी." },
+  { id: 27, restId: 6, cat: "main", name: "Chole Bhature", price: 150, popular: false, veg: true, spice: 2, desc: "Puffed bread paired with spicy chickpea masala.", emoji: "🫘", calories: 520, health: "indulge", prepTime: 18, allergens: ["gluten", "dairy"], ingredients: "Chickpeas, bhature dough, spices.", rating: 4.5, reviews: 142, img: IMG.chole, nameHi: "छोले भटूरे", nameMr: "छोले भटुरे", descHi: "छोले भटूरे।", descMr: "छोले भटुरे." },
+  { id: 28, restId: 6, cat: "main", name: "Keema Pav", price: 170, popular: true, veg: false, spice: 2, desc: "Spiced minced mutton cooked with peas, served with pav.", emoji: "🍞", calories: 430, health: "ok", prepTime: 20, allergens: ["gluten", "dairy"], ingredients: "Minced mutton, peas, pav.", rating: 4.7, reviews: 188, img: IMG.keemaPav, nameHi: "कीमा पाव", nameMr: "कीमा पाव", descHi: "कीमा पाव।", descMr: "कीमा पाव." }
 ];
 
 const LABELS = {
-  en: { all: "All", starter: "Starters", main: "Mains", bread: "Breads", dessert: "Desserts", drinks: "Drinks", search: "Search dishes...", veg: "🌿 Veg", nonveg: "🍗 Non-Veg", all2: "All", bestsellers: "Bestsellers", add: "Add", cart: "Cart", orderWA: "Order on WhatsApp", prep: "Prep", cal: "cal", ingredients: "Ingredients", persons: "Persons", login: "Login", logout: "Logout", admin: "Admin", home: "Home", feedback: "Feedback", noItems: "No dishes found.", fssai: "FSSAI Certified", openTill: "Open till", map: "Map", maxPrice: "Max Price", maxTime: "Max Prep Time", gifOn: "✦ GIF ON", gifOff: "✦ GIF", back: "← Back", history: "History", quickNav: "Quick Nav", noHistory: "No history yet", sort: "Sort", sortDef: "Default", sortFast: "⚡ Fastest", sortPrice: "💰 Price", sortRating: "⭐ Rating", diet: "Diet", filters: "Filters", lastVisit: "Last visited", speak: "Listening… say what you want", submit: "Submit", cancel: "Cancel", thankyou: "Thanks for your feedback 🙏" },
+  en: { all: "All", starter: "Starters", main: "Mains", bread: "Breads", dessert: "Desserts", drinks: "Drinks", search: "Search dishes...", veg: "🌿 Veg", nonveg: "🍗 Non-Veg", all2: "All", bestsellers: "Bestsellers", add: "Add", cart: "Cart", orderWA: "Order on WhatsApp", prep: "Prep", cal: "cal", ingredients: "Ingredients", persons: "Persons", login: "Login", logout: "Logout", admin: "Admin", home: "Home", feedback: "Feedback", noItems: "No dishes found.", fssai: "FSSAI Certified", openTill: "Open till", map: "Map", maxPrice: "Max Price", maxTime: "Max Prep Time", gifOn: "✦ GIF ON", gifOff: "✦ GIF", back: "← Back", history: "History", quickNav: "Quick Nav", noHistory: "No history yet", sort: "Sort", sortDef: "Default", sortFast: "⚡ Fastest", sortPrice: "💰 Price", sortRating: "⭐ Rating", diet: "Diet", filters: "Filters", lastVisit: "Last visited", speak: "Listening…", submit: "Submit", cancel: "Cancel", thankyou: "Thanks for your feedback 🙏" },
   hi: { all: "सभी", starter: "स्टार्टर", main: "मुख्य", bread: "रोटी", dessert: "मिठाई", drinks: "पेय", search: "व्यंजन खोजें...", veg: "🌿 शाकाहारी", nonveg: "🍗 मांसाहारी", all2: "सभी", bestsellers: "केवल बेस्टसेलर", add: "जोड़ें", cart: "कार्ट", orderWA: "WhatsApp ऑर्डर", prep: "समय", cal: "कैलोरी", ingredients: "सामग्री", persons: "व्यक्ति", login: "लॉगिन", logout: "लॉगआउट", admin: "एडमिन", home: "होम", feedback: "प्रतिक्रिया", noItems: "कोई व्यंजन नहीं।", fssai: "FSSAI प्रमाणित", openTill: "खुला", map: "नक्शा", maxPrice: "अधिकतम मूल्य", maxTime: "समय सीमा", gifOn: "✦ GIF चालू", gifOff: "✦ GIF", back: "← वापस", history: "इतिहास", quickNav: "शीघ्र नेव", noHistory: "कोई इतिहास नहीं", sort: "क्रम", sortDef: "डिफ़ॉल्ट", sortFast: "⚡ जल्दी", sortPrice: "💰 मूल्य", sortRating: "⭐ रेटिंग", diet: "आहार", filters: "फिल्टर", lastVisit: "अंतिम विज़िट", speak: "सुन रहा है...", submit: "जमा करें", cancel: "रद्द करें", thankyou: "प्रतिक्रिया के लिए धन्यवाद 🙏" },
   mr: { all: "सर्व", starter: "स्टार्टर", main: "मुख्य", bread: "भाकरी", dessert: "मिठाई", drinks: "पेय", search: "पदार्थ शोधा...", veg: "🌿 शाकाहारी", nonveg: "🍗 मांसाहारी", all2: "सर्व", bestsellers: "फक्त बेस्टसेलर", add: "जोडा", cart: "कार्ट", orderWA: "WhatsApp ऑर्डर", prep: "वेळ", cal: "कॅलरी", ingredients: "साहित्य", persons: "व्यक्ती", login: "लॉगिन", logout: "लॉगआउट", admin: "अॅडमिन", home: "होम", feedback: "अभिप्राय", noItems: "पदार्थ नाही.", fssai: "FSSAI प्रमाणित", openTill: "उघडे", map: "नकाशा", maxPrice: "कमाल किंमत", maxTime: "कमाल वेळ", gifOn: "✦ GIF चालू", gifOff: "✦ GIF", back: "← परत", history: "इतिहास", quickNav: "जलद नेव", noHistory: "इतिहास नाही", sort: "क्रम", sortDef: "डिफॉल्ट", sortFast: "⚡ जलद", sortPrice: "💰 किंमत", sortRating: "⭐ रेटिंग", diet: "आहार", filters: "फिल्टर", lastVisit: "अखेरची भेट", speak: "ऐकत आहे...", submit: "सबमिट", cancel: "रद्द", thankyou: "अभिप्रायाबद्दल धन्यवाद 🙏" },
 };
@@ -233,7 +205,7 @@ function Toasts({ toasts }) {
   );
 }
 
-function HistoryPanel({ hist, restaurants, setRestId, setPage, onClose, L }) {
+function HistoryPanel({ hist, restaurants, goToRestaurant, onClose, L }) {
   return (
     <div style={{ position: "absolute", top: "calc(100% + 8px)", right: 0, background: "#fff", borderRadius: 16, boxShadow: "0 10px 40px rgba(0,0,0,0.2)", border: `1px solid ${T.saffron}33`, zIndex: 400, minWidth: 240, overflow: "hidden" }}>
       <div style={{ padding: "10px 14px 6px", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: T.warmGrey, borderBottom: `1px solid ${T.saffron}22` }}>{L.history}</div>
@@ -243,7 +215,7 @@ function HistoryPanel({ hist, restaurants, setRestId, setPage, onClose, L }) {
         hist.slice().reverse().slice(0, 5).map((h, i) => {
           const r = restaurants.find((x) => x.id === h.restId);
           return (
-            <button key={i} onClick={() => { setRestId(h.restId); setPage("menu"); onClose(); }}
+            <button key={i} onClick={() => { goToRestaurant(h.restId); onClose(); }}
               style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "9px 14px", background: "none", border: "none", cursor: "pointer", textAlign: "left", borderBottom: `1px solid ${T.saffron}11` }}
               onMouseEnter={(e) => e.currentTarget.style.background = T.saffronLight}
               onMouseLeave={(e) => e.currentTarget.style.background = "none"}
@@ -261,7 +233,7 @@ function HistoryPanel({ hist, restaurants, setRestId, setPage, onClose, L }) {
       )}
       <div style={{ padding: "8px 14px 5px", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: T.warmGrey, borderTop: `1px solid ${T.saffron}22` }}>{L.quickNav}</div>
       {restaurants.map((r) => (
-        <button key={r.id} onClick={() => { setRestId(r.id); setPage("menu"); onClose(); }}
+        <button key={r.id} onClick={() => { goToRestaurant(r.id); onClose(); }}
           style={{ width: "100%", display: "flex", alignItems: "center", gap: 9, padding: "8px 14px", background: "none", border: "none", cursor: "pointer", textAlign: "left" }}
           onMouseEnter={(e) => e.currentTarget.style.background = T.saffronLight}
           onMouseLeave={(e) => e.currentTarget.style.background = "none"}
@@ -277,7 +249,7 @@ function HistoryPanel({ hist, restaurants, setRestId, setPage, onClose, L }) {
   );
 }
 
-function Nav({ page, setPage, user, setUser, cart, lang, setLang, L, hist, restaurants, setRestId, gifMode, setGifMode }) {
+function Nav({ page, navigate, user, setUser, cart, lang, setLang, L, hist, restaurants, goToRestaurant, gifMode, setGifMode }) {
   const [histOpen, setHistOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [form, setForm] = useState({ email: "", pass: "", name: "" });
@@ -302,11 +274,11 @@ function Nav({ page, setPage, user, setUser, cart, lang, setLang, L, hist, resta
     <>
       <nav style={{ position: "sticky", top: 0, zIndex: 200, background: "rgba(253,250,245,0.97)", backdropFilter: "blur(14px)", borderBottom: `1px solid ${T.saffron}22`, padding: "10px 14px", minHeight: 56, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10 }}>
         {page !== "home" && (
-          <button onClick={() => setPage("home")} style={{ background: "none", border: `1px solid ${T.saffron}55`, borderRadius: 9, padding: "5px 10px", fontSize: 12, fontWeight: 700, color: T.saffronDark, cursor: "pointer", flexShrink: 0 }}>
+          <button onClick={() => navigate("home")} style={{ background: "none", border: `1px solid ${T.saffron}55`, borderRadius: 9, padding: "5px 10px", fontSize: 12, fontWeight: 700, color: T.saffronDark, cursor: "pointer", flexShrink: 0 }}>
             {L.back}
           </button>
         )}
-        <button onClick={() => setPage("home")} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: 3, flexShrink: 0 }}>
+        <button onClick={() => navigate("home")} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: 3, flexShrink: 0 }}>
           <span style={{ fontFamily: "'Playfair Display',serif", fontWeight: 900, fontSize: 19, color: T.burgundy }}>Menu</span>
           <span style={{ fontFamily: "'Playfair Display',serif", fontWeight: 900, fontSize: 19, color: T.saffron }}>Genie</span>
           <span style={{ fontSize: 15 }}>🧞</span>
@@ -323,14 +295,14 @@ function Nav({ page, setPage, user, setUser, cart, lang, setLang, L, hist, resta
           </select>
           <div style={{ position: "relative" }} ref={panelRef}>
             {btn(`🕐 ${L.history}${hist.length ? ` (${hist.length})` : ""}`, () => setHistOpen((o) => !o), histOpen, T.burgundy)}
-            {histOpen && <HistoryPanel hist={hist} restaurants={restaurants} setRestId={setRestId} setPage={setPage} onClose={() => setHistOpen(false)} L={L} />}
+            {histOpen && <HistoryPanel hist={hist} restaurants={restaurants} goToRestaurant={goToRestaurant} onClose={() => setHistOpen(false)} L={L} />}
           </div>
           {page !== "home" && (
-            <button onClick={() => setPage("cart")} style={{ background: cartCount > 0 ? T.saffron : "#fff", color: cartCount > 0 ? "#fff" : T.saffron, border: `1px solid ${T.saffron}55`, borderRadius: 9, padding: "5px 11px", fontSize: 12, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 5 }}>
+            <button onClick={() => navigate("cart")} style={{ background: cartCount > 0 ? T.saffron : "#fff", color: cartCount > 0 ? "#fff" : T.saffron, border: `1px solid ${T.saffron}55`, borderRadius: 9, padding: "5px 11px", fontSize: 12, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 5 }}>
               🛒 {L.cart} {cartCount > 0 && <span style={{ background: "rgba(255,255,255,0.3)", borderRadius: 6, padding: "0 5px", fontSize: 10, fontWeight: 700 }}>{cartCount}</span>}
             </button>
           )}
-          {user?.isAdmin && btn("⚙ Admin", () => setPage("admin"), page === "admin", T.burgundy)}
+          {user?.isAdmin && btn("⚙ Admin", () => navigate("admin"), page === "admin", T.burgundy)}
           {!user ? (
             <button onClick={() => setLoginOpen(true)} style={{ background: T.burgundy, color: "#fff", border: "none", borderRadius: 9, padding: "6px 13px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>{L.login}</button>
           ) : (
@@ -364,7 +336,7 @@ function Nav({ page, setPage, user, setUser, cart, lang, setLang, L, hist, resta
   );
 }
 
-function Home({ restaurants, setPage, setRestId, L, gifMode, hist }) {
+function Home({ restaurants, goToRestaurant, L, gifMode, hist }) {
   const [search, setSearch] = useState("");
   const filtered = restaurants.filter((r) => r.name.toLowerCase().includes(search.toLowerCase()) || r.cuisine.toLowerCase().includes(search.toLowerCase()) || r.city.toLowerCase().includes(search.toLowerCase()));
   const lastRest = hist.length ? restaurants.find((r) => r.id === hist[hist.length - 1]?.restId) : null;
@@ -379,7 +351,7 @@ function Home({ restaurants, setPage, setRestId, L, gifMode, hist }) {
           <h1 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(26px,5vw,46px)", color: "#fff", fontWeight: 900, lineHeight: 1.1, marginBottom: 10 }}>Scan. See. <em style={{ color: T.saffron }}>Order.</em></h1>
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, lineHeight: 1.65, maxWidth: 400 }}>Digital menus with real photos, allergens, calories & WhatsApp ordering — no app needed.</p>
           {lastRest && (
-            <div style={{ marginTop: 14, display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.1)", borderRadius: 10, padding: "7px 14px", cursor: "pointer" }} onClick={() => { setRestId(lastRest.id); setPage("menu"); }}>
+            <div style={{ marginTop: 14, display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.1)", borderRadius: 10, padding: "7px 14px", cursor: "pointer" }} onClick={() => goToRestaurant(lastRest.id)}>
               <div style={{ width: 28, height: 28, borderRadius: 7, overflow: "hidden" }}>
                 <img src={lastRest.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
@@ -398,7 +370,7 @@ function Home({ restaurants, setPage, setRestId, L, gifMode, hist }) {
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(290px,1fr))", gap: 18 }}>
         {filtered.map((r) => (
-          <div key={r.id} onClick={() => { setRestId(r.id); setPage("menu"); }} style={{ background: "#fff", borderRadius: 20, overflow: "hidden", border: `1px solid rgba(0,0,0,0.07)`, boxShadow: "0 2px 14px rgba(0,0,0,0.06)", cursor: "pointer", transition: "transform 0.2s,box-shadow 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(0,0,0,0.12)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 14px rgba(0,0,0,0.06)"; }}>
+          <div key={r.id} onClick={() => goToRestaurant(r.id)} style={{ background: "#fff", borderRadius: 20, overflow: "hidden", border: `1px solid rgba(0,0,0,0.07)`, boxShadow: "0 2px 14px rgba(0,0,0,0.06)", cursor: "pointer", transition: "transform 0.2s,box-shadow 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(0,0,0,0.12)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 14px rgba(0,0,0,0.06)"; }}>
             
             <div style={{ height: "180px", position: "relative" }}>
               <GifImage src={r.img} alt={r.name} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
@@ -430,7 +402,7 @@ function Home({ restaurants, setPage, setRestId, L, gifMode, hist }) {
   );
 }
 
-function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setPage }) {
+function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, navigate }) {
   const [search, setSearch] = useState("");
   const [cat, setCat] = useState("all");
   const [diet, setDiet] = useState("all");
@@ -479,7 +451,6 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setP
   return (
     <div style={{ maxWidth: 900, margin: "0 auto" }}>
       <div style={{ position: "relative", background: T.charcoal }}>
-        
         <div style={{ height: "240px", overflow: "hidden", position: "relative" }}>
           <GifImage src={rest.img} alt={rest.name} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,transparent 15%,rgba(28,20,16,0.92))" }} />
@@ -677,7 +648,7 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setP
               <div style={{ background: T.saffron, color: "#fff", width: 26, height: 26, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700 }}>{cartCount}</div>
               <span style={{ color: "#fff", fontSize: 14, fontWeight: 500 }}>items · ₹{cartTotal}</span>
             </div>
-            <button onClick={() => setPage("cart")} style={{ background: "#25D366", color: "#fff", border: "none", borderRadius: 10, padding: "8px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+            <button onClick={() => navigate("cart")} style={{ background: "#25D366", color: "#fff", border: "none", borderRadius: 10, padding: "8px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               View Cart
             </button>
@@ -688,7 +659,7 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setP
   );
 }
 
-function Cart({ cart, setCart, dishes, rest, L, setPage, lang, gifMode }) {
+function Cart({ cart, setCart, dishes, rest, L, navigate, lang, gifMode }) {
   const items = Object.entries(cart).map(([id, qty]) => ({ dish: dishes.find((d) => d.id == id), qty })).filter((x) => x.dish && x.dish.restId === rest?.id);
   const total = items.reduce((s, { dish, qty }) => s + dish.price * qty, 0);
   const add = (id) => setCart((c) => ({ ...c, [id]: (c[id] || 0) + 1 }));
@@ -710,7 +681,7 @@ function Cart({ cart, setCart, dishes, rest, L, setPage, lang, gifMode }) {
         <div style={{ textAlign: "center", padding: "60px 0" }}>
           <div style={{ fontSize: 60 }}>🛒</div>
           <p style={{ color: "#bbb", marginTop: 12, fontSize: 15 }}>Your cart is empty</p>
-          <button onClick={() => setPage("menu")} style={{ marginTop: 16, background: T.saffron, color: "#fff", border: "none", borderRadius: 12, padding: "12px 28px", fontSize: 15, fontWeight: 700, cursor: "pointer" }}>Browse Menu →</button>
+          <button onClick={() => navigate("menu")} style={{ marginTop: 16, background: T.saffron, color: "#fff", border: "none", borderRadius: 12, padding: "12px 28px", fontSize: 15, fontWeight: 700, cursor: "pointer" }}>Browse Menu →</button>
         </div>
       ) : (
         <>
@@ -929,16 +900,25 @@ export default function App() {
   const [page, setPage] = useState("home");
   const [restId, setRestId] = useState(null);
   const [user, setUser] = useState(null);
-  const [cart, setCart] = useState({});
+  
+  // Add LocalStorage for Cart and History
+  const [cart, setCart] = useState(() => JSON.parse(localStorage.getItem("mg_cart") || "{}"));
+  const [hist, setHist] = useState(() => JSON.parse(localStorage.getItem("mg_hist") || "[]"));
+  
   const [lang, setLang] = useState("en");
   const [restaurants, setRestaurants] = useState(RESTS);
   const [dishes, setDishes] = useState(DISHES);
   const [gifMode, setGifMode] = useState(false);
-  const [hist, setHist] = useState([]);
   const toast = useToast();
   const L = LABELS[lang] || LABELS.en;
+  
   const activeRest = restaurants.find((r) => r.id === restId);
 
+  // Save Cart & History to local storage whenever they change
+  useEffect(() => localStorage.setItem("mg_cart", JSON.stringify(cart)), [cart]);
+  useEffect(() => localStorage.setItem("mg_hist", JSON.stringify(hist)), [hist]);
+
+  // Global styles
   useEffect(() => {
     const s = document.createElement("style");
     s.textContent = `@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}body{font-family:'DM Sans',sans-serif;background:#FDFAF5;-webkit-tap-highlight-color:transparent;}::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:#E8750A44;border-radius:4px}`;
@@ -946,36 +926,62 @@ export default function App() {
     return () => document.head.removeChild(s);
   }, []);
 
-  const navToMenu = useCallback((id) => {
-    setRestId(id);
-    setPage("menu");
-    const now = new Date();
-    const time = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) + ", " + now.toLocaleDateString([], { month: "short", day: "numeric" });
-    setHist((h) => {
-      const filtered = h.filter((x) => x.restId !== id);
-      return [...filtered, { restId: id, time }].slice(-10);
-    });
+  // NEW: HASH ROUTER LOGIC
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      
+      if (hash.startsWith("#/menu/")) {
+        const id = parseInt(hash.replace("#/menu/", ""));
+        setRestId(id);
+        setPage("menu");
+        
+        // Auto add to history on direct URL visit
+        const now = new Date();
+        const time = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) + ", " + now.toLocaleDateString([], { month: "short", day: "numeric" });
+        setHist((h) => {
+          const filtered = h.filter((x) => x.restId !== id);
+          return [...filtered, { restId: id, time }].slice(-10);
+        });
+
+      } else if (hash.startsWith("#/cart")) {
+        setPage("cart");
+      } else if (hash.startsWith("#/admin")) {
+        setPage("admin");
+      } else {
+        setPage("home");
+        setRestId(null);
+      }
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    handleHashChange(); // Run on initial load
+
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  // Use URL Hash for navigation instead of direct state updates
+  const goToRestaurant = useCallback((id) => {
+    window.location.hash = `#/menu/${id}`;
   }, []);
 
   const navigate = useCallback((p) => {
     if (p === "menu" && restId) {
-      navToMenu(restId);
+      window.location.hash = `#/menu/${restId}`;
+    } else if (p === "home") {
+      window.location.hash = `#/`;
     } else {
-      setPage(p);
+      window.location.hash = `#/${p}`;
     }
-  }, [restId, navToMenu]);
-
-  const handleSetRestId = useCallback((id) => {
-    navToMenu(id);
-  }, [navToMenu]);
+  }, [restId]);
 
   return (
     <div style={{ minHeight: "100vh", background: "#FDFAF5" }}>
-      <Nav page={page} setPage={navigate} user={user} setUser={setUser} cart={cart} lang={lang} setLang={setLang} L={L} hist={hist} restaurants={restaurants} setRestId={handleSetRestId} gifMode={gifMode} setGifMode={setGifMode} />
+      <Nav page={page} navigate={navigate} user={user} setUser={setUser} cart={cart} lang={lang} setLang={setLang} L={L} hist={hist} restaurants={restaurants} goToRestaurant={goToRestaurant} gifMode={gifMode} setGifMode={setGifMode} />
 
-      {page === "home" && <Home restaurants={restaurants} setPage={setPage} setRestId={handleSetRestId} L={L} gifMode={gifMode} hist={hist} />}
-      {page === "menu" && activeRest && <Menu rest={activeRest} dishes={dishes} cart={cart} setCart={setCart} user={user} lang={lang} L={L} toast={toast} gifMode={gifMode} setPage={navigate} />}
-      {page === "cart" && <Cart cart={cart} setCart={setCart} dishes={dishes} rest={activeRest} L={L} setPage={navigate} lang={lang} gifMode={gifMode} />}
+      {page === "home" && <Home restaurants={restaurants} goToRestaurant={goToRestaurant} L={L} gifMode={gifMode} hist={hist} />}
+      {page === "menu" && activeRest && <Menu rest={activeRest} dishes={dishes} cart={cart} setCart={setCart} user={user} lang={lang} L={L} toast={toast} gifMode={gifMode} navigate={navigate} />}
+      {page === "cart" && <Cart cart={cart} setCart={setCart} dishes={dishes} rest={activeRest} L={L} navigate={navigate} lang={lang} gifMode={gifMode} />}
       {page === "admin" && user?.isAdmin && <Admin restaurants={restaurants} setRestaurants={setRestaurants} dishes={dishes} setDishes={setDishes} toast={toast} gifMode={gifMode} />}
 
       <Toasts toasts={toast.toasts} />
