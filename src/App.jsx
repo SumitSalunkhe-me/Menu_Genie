@@ -15,44 +15,46 @@ const T = {
   white: "#FFFDF8",
 };
 
+// 1. UPDATED IMAGES: Added &h=500&fit=crop to ensure perfect squares and 16:9 ratios from the server
 const IMG = {
-  paneerTikka: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&q=80",
-  manchurian: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&q=80",
-  butterChicken: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=500&q=80",
-  dalMakhani: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=500&q=80",
-  palakPaneer: "https://images.unsplash.com/photo-1604152135912-04a022e23696?w=500&q=80",
-  naan: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=500&q=80",
-  gulabJamun: "https://images.unsplash.com/photo-1666189043769-61ee0ad01d53?w=500&q=80",
-  mangoLassi: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=500&q=80",
-  pavBhaji: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&q=80",
-  buddhaBowl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=80",
-  spiceGarden: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&q=80",
-  mumbaiFoods: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=700&q=80",
-  greenBowl: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=700&q=80",
-  // New restaurant hero images
-  tandoorTales: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=700&q=80",
-  coastalCurry: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=700&q=80",
-  streetBites: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=700&q=80",
-  // New dish images
-  seekhKebab: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=500&q=80",
-  mughlaiChicken: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&q=80",
-  biryani: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&q=80",
-  sheerKhorma: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&q=80",
-  paratha: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&q=80",
-  roohAfza: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=500&q=80",
-  dosaMasala: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=500&q=80",
-  chettinadChicken: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&q=80",
-  prawnsKoliwada: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=500&q=80",
-  sambarRice: "https://images.unsplash.com/photo-1567337710282-00832b415979?w=500&q=80",
-  coconutChutney: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&q=80",
-  filterCoffee: "https://images.unsplash.com/photo-1495774856032-8b90bbb32b32?w=500&q=80",
-  rassmalai: "https://images.unsplash.com/photo-1666189043769-61ee0ad01d53?w=500&q=80",
-  vadaPav: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&q=80",
-  chole: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=500&q=80",
-  paniPuri: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&q=80",
-  keemaPav: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&q=80",
-  jalebi: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&q=80",
-  masalaChai: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=500&q=80",
+  // Dishes (1:1 Square)
+  paneerTikka: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&h=500&fit=crop&q=80",
+  manchurian: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&h=500&fit=crop&q=80",
+  butterChicken: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=500&h=500&fit=crop&q=80",
+  dalMakhani: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=500&h=500&fit=crop&q=80",
+  palakPaneer: "https://images.unsplash.com/photo-1604152135912-04a022e23696?w=500&h=500&fit=crop&q=80",
+  naan: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=500&h=500&fit=crop&q=80",
+  gulabJamun: "https://images.unsplash.com/photo-1666189043769-61ee0ad01d53?w=500&h=500&fit=crop&q=80",
+  mangoLassi: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=500&h=500&fit=crop&q=80",
+  pavBhaji: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&h=500&fit=crop&q=80",
+  buddhaBowl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=500&fit=crop&q=80",
+  seekhKebab: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=500&h=500&fit=crop&q=80",
+  mughlaiChicken: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&h=500&fit=crop&q=80",
+  biryani: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&h=500&fit=crop&q=80",
+  sheerKhorma: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=500&h=500&fit=crop&q=80",
+  paratha: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&h=500&fit=crop&q=80",
+  roohAfza: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=500&h=500&fit=crop&q=80",
+  dosaMasala: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=500&h=500&fit=crop&q=80",
+  chettinadChicken: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&h=500&fit=crop&q=80",
+  prawnsKoliwada: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=500&h=500&fit=crop&q=80",
+  sambarRice: "https://images.unsplash.com/photo-1567337710282-00832b415979?w=500&h=500&fit=crop&q=80",
+  coconutChutney: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&h=500&fit=crop&q=80",
+  filterCoffee: "https://images.unsplash.com/photo-1495774856032-8b90bbb32b32?w=500&h=500&fit=crop&q=80",
+  rassmalai: "https://images.unsplash.com/photo-1666189043769-61ee0ad01d53?w=500&h=500&fit=crop&q=80",
+  vadaPav: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=500&h=500&fit=crop&q=80",
+  chole: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=500&h=500&fit=crop&q=80",
+  paniPuri: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500&h=500&fit=crop&q=80",
+  keemaPav: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=500&h=500&fit=crop&q=80",
+  jalebi: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=500&h=500&fit=crop&q=80",
+  masalaChai: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=500&h=500&fit=crop&q=80",
+
+  // Restaurants (16:9 Aspect Ratio)
+  spiceGarden: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=450&fit=crop&q=80",
+  mumbaiFoods: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=450&fit=crop&q=80",
+  greenBowl: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=450&fit=crop&q=80",
+  tandoorTales: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&h=450&fit=crop&q=80",
+  coastalCurry: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=800&h=450&fit=crop&q=80",
+  streetBites: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&h=450&fit=crop&q=80",
 };
 
 const GIF_FRAMES = [
@@ -191,7 +193,6 @@ function Toasts({ toasts }) {
   );
 }
 
-// ─── HISTORY DROPDOWN ─────────────────────────────────────────────────────────
 function HistoryPanel({ hist, restaurants, setRestId, setPage, onClose, L }) {
   return (
     <div style={{ position: "absolute", top: "calc(100% + 8px)", right: 0, background: "#fff", borderRadius: 16, boxShadow: "0 10px 40px rgba(0,0,0,0.2)", border: `1px solid ${T.saffron}33`, zIndex: 400, minWidth: 240, overflow: "hidden" }}>
@@ -236,7 +237,6 @@ function HistoryPanel({ hist, restaurants, setRestId, setPage, onClose, L }) {
   );
 }
 
-// ─── NAV ──────────────────────────────────────────────────────────────────────
 function Nav({ page, setPage, user, setUser, cart, lang, setLang, L, hist, restaurants, setRestId, gifMode, setGifMode }) {
   const [histOpen, setHistOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
@@ -324,7 +324,6 @@ function Nav({ page, setPage, user, setUser, cart, lang, setLang, L, hist, resta
   );
 }
 
-// ─── HOME ─────────────────────────────────────────────────────────────────────
 function Home({ restaurants, setPage, setRestId, L, gifMode, hist }) {
   const [search, setSearch] = useState("");
   const filtered = restaurants.filter((r) => r.name.toLowerCase().includes(search.toLowerCase()) || r.cuisine.toLowerCase().includes(search.toLowerCase()) || r.city.toLowerCase().includes(search.toLowerCase()));
@@ -360,11 +359,14 @@ function Home({ restaurants, setPage, setRestId, L, gifMode, hist }) {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(290px,1fr))", gap: 18 }}>
         {filtered.map((r) => (
           <div key={r.id} onClick={() => { setRestId(r.id); setPage("menu"); }} style={{ background: "#fff", borderRadius: 20, overflow: "hidden", border: `1px solid rgba(0,0,0,0.07)`, boxShadow: "0 2px 14px rgba(0,0,0,0.06)", cursor: "pointer", transition: "transform 0.2s,box-shadow 0.2s" }} onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 14px 40px rgba(0,0,0,0.12)"; }} onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 14px rgba(0,0,0,0.06)"; }}>
-            <div style={{ height: 175, position: "relative" }}>
+            
+            {/* 3. FLUID ASPECT RATIO FOR HOME CARDS */}
+            <div style={{ aspectRatio: "16/9", position: "relative" }}>
               <GifImage src={r.img} alt={r.name} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
               {r.popular && <div style={{ position: "absolute", top: 10, right: 10, background: T.saffron, color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 9px", borderRadius: 9 }}>⭐ Popular</div>}
               {hist.some((h) => h.restId === r.id) && <div style={{ position: "absolute", top: 10, left: 10, background: "rgba(0,0,0,0.65)", color: "#fff", fontSize: 9, fontWeight: 700, padding: "3px 8px", borderRadius: 7, letterSpacing: 0.5 }}>🕐 Visited</div>}
             </div>
+            
             <div style={{ padding: "14px 16px" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 5 }}>
                 <div>
@@ -389,7 +391,6 @@ function Home({ restaurants, setPage, setRestId, L, gifMode, hist }) {
   );
 }
 
-// ─── MENU PAGE ─────────────────────────────────────────────────────────────────
 function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setPage }) {
   const [search, setSearch] = useState("");
   const [cat, setCat] = useState("all");
@@ -439,20 +440,21 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setP
   return (
     <div style={{ maxWidth: 900, margin: "0 auto" }}>
       <div style={{ position: "relative", background: T.charcoal }}>
-        <div style={{ height: 140, overflow: "hidden", position: "relative" }}>
+        {/* FLUID BANNER ASPECT RATIO */}
+        <div style={{ aspectRatio: "21/9", maxHeight: "280px", overflow: "hidden", position: "relative" }}>
           <GifImage src={rest.img} alt={rest.name} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,transparent 25%,rgba(28,20,16,0.88))" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,transparent 15%,rgba(28,20,16,0.92))" }} />
         </div>
         <div style={{ padding: "12px 16px 16px", background: `linear-gradient(${T.charcoal},#2D1A00)` }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
             <div>
-              <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: 21, color: "#fff", fontWeight: 700 }}>{rest.emoji} {rest.name}</h2>
-              <p style={{ fontSize: 11, color: T.saffron, letterSpacing: 1, marginTop: 2 }}>{rest.cuisine} · {rest.area}, {rest.city}</p>
+              <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: 24, color: "#fff", fontWeight: 700 }}>{rest.emoji} {rest.name}</h2>
+              <p style={{ fontSize: 12, color: T.saffron, letterSpacing: 1, marginTop: 2 }}>{rest.cuisine} · {rest.area}, {rest.city}</p>
               <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 6, fontSize: 10, color: T.success, fontWeight: 600, background: "rgba(45,122,79,0.2)", borderRadius: 7, padding: "2px 9px", width: "fit-content" }}>✓ {L.fssai}: {rest.fssai}</div>
             </div>
             <div style={{ textAlign: "right", flexShrink: 0 }}>
               <div style={{ fontSize: 20, fontWeight: 900, color: T.saffron }}>⭐ {rest.rating}</div>
-              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)" }}>{rest.reviews} reviews</div>
+              <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>{rest.reviews} reviews</div>
             </div>
           </div>
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap", fontSize: 11, color: "rgba(255,255,255,0.55)" }}>
@@ -532,66 +534,74 @@ function Menu({ rest, dishes, cart, setCart, user, lang, L, toast, gifMode, setP
         ) : (
           filtered.map((d) => {
             const qty = cart[d.id] || 0;
-            const [hBg, hCol, hTxt] = healthStyle[d.health];
             return (
-              <div key={d.id} style={{ background: "#fff", borderRadius: 20, overflow: "hidden", border: `1px solid rgba(0,0,0,0.07)`, boxShadow: "0 2px 14px rgba(0,0,0,0.06)" }}>
-                <div style={{ position: "relative", height: 168 }}>
-                  <GifImage src={d.img} alt={nm(d, lang)} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
-                  <div style={{ position: "absolute", top: 10, left: 10, width: 20, height: 20, borderRadius: 4, border: `2px solid ${d.veg ? T.success : T.danger}`, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <div style={{ width: 8, height: 8, borderRadius: "50%", background: d.veg ? T.success : T.danger }} />
+              // 2. COMPLETELY REDESIGNED DISH CARD: Swiggy/Zomato Style Horizontal Layout
+              <div key={d.id} style={{ background: "#fff", borderRadius: 16, overflow: "hidden", border: `1px solid rgba(0,0,0,0.06)`, boxShadow: "0 4px 16px rgba(0,0,0,0.04)", padding: "16px", display: "flex", gap: "16px" }}>
+                
+                {/* Left Side: Details */}
+                <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
+                    <div style={{ width: 16, height: 16, borderRadius: 4, border: `1.5px solid ${d.veg ? T.success : T.danger}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <div style={{ width: 8, height: 8, borderRadius: "50%", background: d.veg ? T.success : T.danger }} />
+                    </div>
+                    {d.popular && <span style={{ background: T.saffronLight, color: T.saffronDark, fontSize: 10, fontWeight: 800, padding: "2px 6px", borderRadius: 4, letterSpacing: 0.5, textTransform: "uppercase" }}>Bestseller</span>}
                   </div>
-                  {d.popular && <div style={{ position: "absolute", top: 10, right: 10, background: T.saffron, color: "#fff", fontSize: 10, fontWeight: 700, padding: "3px 9px", borderRadius: 9 }}>⭐ Popular</div>}
-                  <div style={{ position: "absolute", bottom: 10, left: 10, display: "flex", gap: 3 }}>
-                    {Array.from({ length: d.spice }).map((_, i) => <span key={i} style={{ background: "rgba(0,0,0,0.55)", borderRadius: 4, padding: "2px 4px", fontSize: 10 }}>🌶</span>)}
-                  </div>
-                  <div style={{ position: "absolute", bottom: 10, right: 10, background: "rgba(0,0,0,0.62)", color: "#fff", fontSize: 10, fontWeight: 600, padding: "3px 8px", borderRadius: 7 }}>⏱ {d.prepTime} min</div>
-                </div>
 
-                <div style={{ padding: "13px 15px 15px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 5 }}>
-                    <span style={{ color: "#F4C430", fontSize: 11 }}>{"★".repeat(Math.floor(d.rating))}{"☆".repeat(5 - Math.floor(d.rating))}</span>
-                    <span style={{ fontSize: 11, color: T.warmGrey }}>{d.rating} ({d.reviews})</span>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8, marginBottom: 5 }}>
-                    <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 17, fontWeight: 700, lineHeight: 1.3 }}>{nm(d, lang)}</h3>
-                    <div style={{ textAlign: "right", flexShrink: 0 }}>
-                      <div style={{ fontSize: 17, fontWeight: 700, color: T.saffron }}>₹{d.price}</div>
-                      {persons > 1 && <div style={{ fontSize: 10, color: T.warmGrey }}>₹{d.price * persons} × {persons}</div>}
+                  <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: 18, fontWeight: 700, lineHeight: 1.2, color: T.charcoal, marginBottom: 6 }}>{nm(d, lang)}</h3>
+                  
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: T.charcoal }}>₹{d.price}</div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
+                       <span style={{ color: "#F4C430", fontSize: 13 }}>{"★".repeat(Math.floor(d.rating))}</span>
+                       <span style={{ fontSize: 12, color: T.warmGrey, fontWeight: 500 }}>({d.reviews})</span>
                     </div>
                   </div>
-                  <p style={{ fontSize: 13, color: T.warmGrey, lineHeight: 1.55, marginBottom: 9 }}>{dc(d, lang)}</p>
 
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 9 }}>
+                  <p style={{ fontSize: 13, color: T.warmGrey, lineHeight: 1.45, marginBottom: 12, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{dc(d, lang)}</p>
+                  
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 }}>
                     {d.allergens.map((a) => {
                       const [bg, col] = (allergenColor[a] || "#eee:#666").split(":");
-                      return <span key={a} style={{ fontSize: 10, fontWeight: 600, padding: "2px 8px", borderRadius: 6, background: bg, color: col, textTransform: "uppercase" }}>{a}</span>;
+                      return <span key={a} style={{ fontSize: 10, fontWeight: 700, padding: "3px 8px", borderRadius: 6, background: bg, color: col, textTransform: "uppercase" }}>{a}</span>;
                     })}
-                    <span style={{ fontSize: 10, fontWeight: 600, padding: "2px 8px", borderRadius: 6, background: hBg, color: hCol }}>{hTxt}</span>
                   </div>
 
-                  <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
-                    <div>
-                      <div style={{ fontSize: 12, color: T.warmGrey, marginBottom: 4 }}>🔥 {Math.round(d.calories * persons)} {L.cal}{persons > 1 ? ` (×${persons})` : ""}</div>
-                      <button onClick={() => setExpanded((p) => ({ ...p, [d.id]: !p[d.id] }))} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 12, color: T.saffron, fontWeight: 600, padding: 0 }}>
-                        {expanded[d.id] ? "▾" : "▸"} {L.ingredients}
-                      </button>
-                    </div>
-                    {qty === 0 ? (
-                      <button onClick={() => add(d.id)} style={{ background: T.saffron, color: "#fff", border: "none", cursor: "pointer", padding: "8px 20px", borderRadius: 10, fontSize: 13, fontWeight: 700 }}>{L.add}</button>
-                    ) : (
-                      <div style={{ display: "flex", alignItems: "center", gap: 8, background: T.saffronLight, borderRadius: 10, padding: "4px 8px" }}>
-                        <button onClick={() => rem(d.id)} style={{ width: 28, height: 28, borderRadius: 8, background: T.saffron, border: "none", color: "#fff", fontSize: 18, cursor: "pointer", fontWeight: 700 }}>−</button>
-                        <span style={{ fontWeight: 700, fontSize: 15, minWidth: 20, textAlign: "center" }}>{qty}</span>
-                        <button onClick={() => add(d.id)} style={{ width: 28, height: 28, borderRadius: 8, background: T.saffron, border: "none", color: "#fff", fontSize: 18, cursor: "pointer", fontWeight: 700 }}>+</button>
+                  <div style={{ marginTop: "auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                      <div style={{ fontSize: 12, color: T.warmGrey, display: "flex", gap: 12, fontWeight: 500 }}>
+                        <span>🔥 {Math.round(d.calories * persons)} cal</span>
+                        <span>⏱ {d.prepTime} min</span>
                       </div>
-                    )}
+                      <button onClick={() => setExpanded((p) => ({ ...p, [d.id]: !p[d.id] }))} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: T.saffron, fontWeight: 700, padding: 0 }}>
+                        {expanded[d.id] ? "▾ Hide" : "▸ View"} Details
+                      </button>
                   </div>
 
                   {expanded[d.id] && (
-                    <div style={{ marginTop: 10, padding: "10px 13px", background: T.saffronLight, borderRadius: 10, fontSize: 12, color: T.charcoal, lineHeight: 1.65, borderLeft: `3px solid ${T.saffron}` }}>
-                      <strong style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: 1, color: T.saffronDark }}>Ingredients</strong><br />{d.ingredients}
+                    <div style={{ marginTop: 12, padding: "12px", background: T.saffronLight, borderRadius: 10, fontSize: 12, color: T.charcoal, lineHeight: 1.6, borderLeft: `3px solid ${T.saffron}` }}>
+                      <strong style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: 0.5, color: T.saffronDark }}>Ingredients</strong><br />{d.ingredients}
                     </div>
                   )}
+                </div>
+
+                {/* Right Side: Square Image & Overlapping Add Button */}
+                <div style={{ width: "130px", flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <div style={{ width: "130px", height: "130px", borderRadius: "16px", overflow: "hidden", position: "relative", boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}>
+                    <GifImage src={d.img} alt={nm(d, lang)} style={{ width: "100%", height: "100%" }} gifMode={gifMode} />
+                  </div>
+                  
+                  <div style={{ marginTop: "-16px", zIndex: 2, width: "100%", display: "flex", justifyContent: "center" }}>
+                    {qty === 0 ? (
+                      <button onClick={() => add(d.id)} style={{ background: "#fff", color: T.success, border: `1px solid ${T.success}44`, cursor: "pointer", padding: "8px 28px", borderRadius: "10px", fontSize: 15, fontWeight: 800, boxShadow: "0 4px 10px rgba(0,0,0,0.06)", textTransform: "uppercase", width: "110px" }}>
+                        Add
+                      </button>
+                    ) : (
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#fff", border: `1px solid ${T.success}`, borderRadius: "10px", padding: "4px 8px", boxShadow: "0 4px 10px rgba(0,0,0,0.06)", width: "110px" }}>
+                        <button onClick={() => rem(d.id)} style={{ width: 28, height: 28, background: "none", border: "none", color: T.success, fontSize: 20, cursor: "pointer", fontWeight: 700, display:"flex", alignItems:"center", justifyContent:"center" }}>−</button>
+                        <span style={{ fontWeight: 800, fontSize: 15, minWidth: 20, textAlign: "center", color: T.success }}>{qty}</span>
+                        <button onClick={() => add(d.id)} style={{ width: 28, height: 28, background: "none", border: "none", color: T.success, fontSize: 20, cursor: "pointer", fontWeight: 700, display:"flex", alignItems:"center", justifyContent:"center" }}>+</button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             );
@@ -879,7 +889,6 @@ function Admin({ restaurants, setRestaurants, dishes, setDishes, toast, gifMode 
   );
 }
 
-// ─── APP ─────────────────────────────────────────────────────────────────────
 export default function App() {
   const [page, setPage] = useState("home");
   const [restId, setRestId] = useState(null);
